@@ -21,3 +21,5 @@ General document database for information/document storage running in a console.
 - Feature 2: querying documents
 - Feature 3: search for unique identifiers 
 - Feature 4: CRUD operations
+
+![Alt text](UML.JPG)
