@@ -15,6 +15,7 @@ General document database for information/document storage running in a console.
 ## Technologies
 - **Interface**: terminal/shell console
 - **Programming languages**: C++
+- **Libraries**: RapidJson, JsonCons, GTest
 
 ## Features (tentative)
 - Feature 1: Filtering data
