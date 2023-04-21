@@ -5,17 +5,17 @@
 General document database for information/document storage running in a console.
 
 ## Team Members
-- Farnaz Mozhgani (development lead/software architect)
-- Fnu Azma (quality assurance/testing lead)
+- Farnaz Mozhgani (software architect)
+- Fnu Azma (user/programming interface engineer)
 - Muneeb Ghori (data structure engineer)
-- Adeel Hussain (algorithm and performance specialist)
+- Adeel Hussain (algorithm and performance specialist / data structure engineer)
 - Uzair Memon (user/programming interface engineer)
-- Harsh Patel (to be assigned)
+- Harsh Patel (Development Lead / Testing Lead)
 
 ## Technologies
 - **Interface**: terminal/shell console
 - **Programming languages**: C++
-- **Libraries**: RapidJson, JsonCons, GTest
+- **Libraries**: RapidJson, GTest
 
 ## Features (tentative)
 - Feature 1: Filtering data
