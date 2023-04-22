@@ -27,4 +27,4 @@ General document database for information/document storage running in a console.
 
 ## Class Diagram
 [FriendlyCDB_UML](https://lucid.app/documents/embedded/2fd26883-22f0-4d6a-bd90-33ecd24ce9b5#)
-![Alt text](UML.JPG)
+![Alt text](CS180UML.png)
