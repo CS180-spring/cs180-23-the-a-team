@@ -2,15 +2,15 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_SUBDIRECTORY(googletest)
-ADD_SUBDIRECTORY(jsoncons)
+#ADD_SUBDIRECTORY(googletest)
+ADD_SUBDIRECTORY(rapidjson)
 
 ADD_EXECUTABLE(FriendlyCDB
-    main.cpp
+    main.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp
 )
 
 ADD_EXECUTABLE(test
-    unittest.cpp
+    unittest.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
