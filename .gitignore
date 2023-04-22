@@ -3,7 +3,10 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 *.o
+*.pc
 src/*o
 FriendlyCDB
 test
+bin/
+rapidjson/test/unittest/
 
