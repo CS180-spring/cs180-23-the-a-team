@@ -3,4 +3,7 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 *.o
-src/*.o
+src/*o
+FriendlyCDB
+test
+
