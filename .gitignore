@@ -3,9 +3,7 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 *.o
-src/*.o
-**/*.o
-**/*.make
-googletest/CMakeFiles/
-jsoncons/CMakeFiles/
-rapidjson/CMakeFiles/
+src/*o
+FriendlyCDB
+test
+
