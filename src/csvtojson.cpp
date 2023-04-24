@@ -1,23 +1,76 @@
 #include "csvtojson.h"
 
 using namespace std;
-using namespace jsoncons;
 
 csvtojson::csvtojson(){}
 
-void csvtojson::addjson(string name)
+void csvtojson::printcsv(string name, int datarows)
 {
-    //Using small amounts of code from: https://danielaparker.github.io/jsoncons/#A5
-    ifstream is(name);
+    //Check name if it has .csv
+    string csvfile;
+    string extension = ".csv";
+    if (name.find(extension) == string::npos)
+    {
+        csvfile = "Inputs/" + name + extension;
+    }
+    else
+    {
+        csvfile = "Inputs/" + name;
+    }
+    
+    fstream file;
+    //fstream jsonfile;
+    file.open(csvfile);
+    //jsonfile.open("Inputs/test1.json");
 
-    csv::csv_options options;
-    options.assume_header(true)
-           .trim(true)
-           .column_types("string");
-    ojson convertedtext = csv::decode_csv<ojson>(is, options);
+    string columns, temp, comma = ",";
+    vector<string> columnlist;
 
-    string newfile = "jsonof_" + name +".json";
-    ofstream o(newfile);
-    o << pretty_print(convertedtext);
+    cout << "File name: " << csvfile << endl;
+    getline(file, columns);
+
+    int positionOfcomma = 0;
+    while(columns.find(comma) != string::npos)
+    {
+        positionOfcomma = columns.find(comma);
+        columnlist.push_back(columns.substr(0,positionOfcomma));
+        columns.erase(0,positionOfcomma+1);
+
+    }
+    if (columns.length() != 0)
+    {
+        positionOfcomma = columns.find(comma);
+        columnlist.push_back(columns.substr(0,positionOfcomma));
+        columns.erase(0,positionOfcomma+1);
+    }
+
+    int rows = 0;
+    while(file.is_open())
+    {
+        for(int i = 0; i < columnlist.size(); i++)
+        {
+            if(i == (columnlist.size() - 1))
+            {
+                getline(file,temp);  
+            }
+            else if (i <= (columnlist.size() - 1))
+            {
+                getline(file,temp,','); 
+            }
+            if (rows == datarows)
+            {
+                file.close();
+                break;
+            }
+            else
+            {
+                cout << temp;
+            }
+            
+        }
+        rows++;
+
+    }  
 
 }
+

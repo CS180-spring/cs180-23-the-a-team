@@ -1,16 +1,19 @@
 #ifndef CSVTOJSON_H
 #define CSVTOJSON_H
 
+#include <iostream>
+#include <fstream>
 #include <string>
 #include <fstream>
-#include "jsoncons/json.hpp"
-#include "jsoncons/include/jsoncons_ext/csv/csv.hpp"
+#include <vector>
+
+using namespace std;
 
 class csvtojson
 {
     public:
-        csvtojson(){}
-        void addjson(string name){}
+        csvtojson();
+        void printcsv(string name, int datarows);
     private:
 
 };

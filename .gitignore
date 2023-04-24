@@ -3,4 +3,11 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 *.o
-src/*.o
+*.pc
+src/*o
+FriendlyCDB
+test
+bin/
+rapidjson/test/unittest/
+build/
+
