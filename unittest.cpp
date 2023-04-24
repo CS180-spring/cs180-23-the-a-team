@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "rapidjson/include/rapidjson/document.h"
+#include "src/csvtojson.h"
 
 //TEST(s) goes above main
 TEST(csvtojson, test1){
