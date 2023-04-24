@@ -5,7 +5,16 @@ using namespace std;
 
 int main() 
 {
+
     csvtojson c;
-    c.printcsv("test1", 3);
+    string name;
+    int sizeofdata;
+
+    cout << "PLEASE input csv file to ..[ProjectFolder]/Inputs/" << endl;
+    cout << "Enter the name of your csv file(no spaces): ";
+    cin >> name;
+    cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+    cin >> sizeofdata;
+    c.printcsv(name, sizeofdata);
     return 0;
 }
