@@ -1,11 +1,9 @@
 #include "gtest/gtest.h"
+#include "src/csvtojson.h"
 #include "rapidjson/include/rapidjson/document.h"
 #include "src/csvtojson.h"
 
 //TEST(s) goes above main
-TEST(csvtojson, test1){
-  
-}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

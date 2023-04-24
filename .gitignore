@@ -9,4 +9,5 @@ FriendlyCDB
 test
 bin/
 rapidjson/test/unittest/
+build/
 
