@@ -9,28 +9,30 @@ struct Node
 {
 	ItemType value;
 	Node* next;
+	Node* prev;
 };
 
 class LinkedList
 {
 private:
 	Node* head;
+	Node* tail;
 public:
-	// constructor       
-	LinkedList() : head(nullptr) { }
-	// copy constructor       
-	LinkedList(const LinkedList& rhs);
-	// destructor
+	// default constructor       
+	LinkedList() : head(nullptr), tail(nullptr) { }
+	// Destroys all the dynamically allocated memory       
+	// in the list.       
 	~LinkedList();
-	// assignment operator       
-	const LinkedList& operator=(const LinkedList& rhs);
-	// insert to end of list    
+	// Inserts val at the rear of the list       
 	void insertToRear(const ItemType& val);
-	// print list
+	// Prints the LinkedList
 	void printList() const;
-	// value at position 'i' of the list
-	ItemType& get(int i) const;      
-	// size of list     
+	// Sets item to the value at position i in this       
+	// LinkedList and return true, returns false if        
+	// there is no element i 
+	ItemType& get(int i) const;
+	// Reverses the LinkedList       
+	// Returns the number of items in the Linked List.       
 	int size() const;
 };
 #endif

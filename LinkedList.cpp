@@ -2,44 +2,14 @@
 #include <iostream>
 using namespace std;
 
-LinkedList::LinkedList(const LinkedList& rhs)
-{
-	head = nullptr;
-	*this = rhs;
-}
-
 LinkedList::~LinkedList()
-{
-	Node* temp = head;
-	Node* p = head;
-
-	while (p != nullptr)
-	{
-		p = temp->next;
-		delete temp;
-		temp = p;
-	}
-}
-
-const LinkedList& LinkedList::operator=(const LinkedList& rhs)
 {
 	while (head != nullptr)
 	{
-		Node* old = head;
+		Node* p = head;
 		head = head->next;
-
-		delete old;
+		delete p;
 	}
-
-	Node* temp = rhs.head;
-
-	while (temp != nullptr)
-	{
-		insertToRear(temp->value);
-		temp = temp->next;
-	}
-
-	return *this;
 }
 
 void LinkedList::insertToRear(const ItemType& val)
@@ -51,14 +21,12 @@ void LinkedList::insertToRear(const ItemType& val)
 	if (head == nullptr)
 	{
 		head = n;
+		tail = n;
 	}
 	else
 	{
-		while (temp->next != nullptr)
-		{
-			temp = temp->next;
-		}
-		temp->next = n;
+		tail->next = n;
+		tail = n;
 	}
 }
 void LinkedList::printList() const
