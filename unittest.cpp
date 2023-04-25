@@ -3,7 +3,14 @@
 #include "rapidjson/include/rapidjson/document.h"
 #include "src/csvtojson.h"
 
-//TEST(s) goes above main
+TEST(printcsv, withoutextension){
+  csvtojson c;
+  c.printcsv("test1",3);
+}
+TEST(printcsv, withextension){
+  csvtojson c;
+  c.printcsv("test1.csv",3);
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
