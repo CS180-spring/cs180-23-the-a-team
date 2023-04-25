@@ -42,7 +42,7 @@ const LinkedList& LinkedList::operator=(const LinkedList& rhs)
 	return *this;
 }
 
-void::LinkedList::insertToRear(const ItemType& val)
+void LinkedList::insertToRear(const ItemType& val)
 {
 	Node* n = new Node, * temp = head;
 	n->value = val;
@@ -74,11 +74,11 @@ void LinkedList::printList() const
 }
 ItemType& LinkedList::get(int i) const
 {
-	ItemType& Item;
 	Node* temp = head;
+	ItemType& Item = temp->value;
 
 	if (head == nullptr)
-		return NULL;
+		return Item;
 
 	int k = 0;
 
@@ -93,7 +93,7 @@ ItemType& LinkedList::get(int i) const
 		temp = temp->next;
 	}
 
-	return NULL;
+	return Item;
 }
 int LinkedList::size() const
 {
@@ -105,6 +105,6 @@ int LinkedList::size() const
 		temp = temp->next;
 		count++;
 	}
-	
+
 	return count;
 }
