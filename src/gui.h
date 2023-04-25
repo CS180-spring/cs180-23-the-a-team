@@ -6,12 +6,9 @@
 class gui
 {
     public:
-          void main();
+            gui(){}
     private:
-         void welcome();
-         void login();
-         void menu(bool& user);
-        
+
 };
 
 #endif
