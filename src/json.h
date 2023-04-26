@@ -6,7 +6,7 @@
 class json
 {
     public:
-            json(){}
+            writeJson(){}
     private:
 
 };
