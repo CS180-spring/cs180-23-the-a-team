@@ -6,7 +6,7 @@
 class json
 {
     public:
-            writeJson(){}
+            void writeJson(){}
     private:
 
 };
