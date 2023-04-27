@@ -2,23 +2,23 @@
 #include "src/csvtojson.h"
 #include "rapidjson/include/rapidjson/document.h"
 #include "src/csvtojson.h"
+#include <iostream>
+#include <fstream>
 #include <sstream>
 
-TEST(printcsv, withoutextension){
+//TEST(s) goes above main
+TEST(csvtojson, withoutextension){
   csvtojson c;
-  stringstream out;
-  c.printcsv("test1",3, out);
-  string result = out.str();
-  string ans= "JohnBluetrueBobRedfalseJhonnyGreentrue";
-  EXPECT_EQ(result,ans);
+  stringstream ss;
+  c.printcsv("test1", 3, ss);
+  EXPECT_EQ(ss, "JohnBluetrueBobRedfalseJhonnyGreentrue");
 }
-TEST(printcsv, withextension){
+
+TEST(csvtojson, withextension){
   csvtojson c;
-  stringstream out;
-  c.printcsv("test1.csv",3, out);
-  string result = out.str();
-  string ans= "JohnBluetrueBobRedfalseJhonnyGreentrue";
-  EXPECT_EQ(result,ans);
+  stringstream ss;
+  c.printcsv("test1.csv", 3,ss);
+  EXPECT_EQ(ss, "JohnBluetrueBobRedfalseJhonnyGreentrue");
 }
 
 int main(int argc, char **argv) {

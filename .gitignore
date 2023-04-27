@@ -10,6 +10,7 @@ test
 bin/
 rapidjson/test/unittest/
 build/
+settings.json
 lib/
 rapidjson/test/
 rapidjson/CMakeFiles

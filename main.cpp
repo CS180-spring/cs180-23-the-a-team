@@ -2,6 +2,7 @@
 #include "rapidjson/include/rapidjson/document.h"
 #include "src/csvtojson.h"
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include "src/gui.h"
 
