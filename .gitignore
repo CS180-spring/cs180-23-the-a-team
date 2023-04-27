@@ -10,4 +10,14 @@ test
 bin/
 rapidjson/test/unittest/
 build/
+lib/
+rapidjson/test/
+rapidjson/CMakeFiles
+rapidjson/CMakeCache
+rapidjson/cmake_install.cmake
+rapidjson/CMakeCache.txt
+googletest/CMakeFiles
+googletest/CMakeCache
+googletest/cmake_install.cmake
+googletest/CMakeCache.txt
 
