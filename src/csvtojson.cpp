@@ -4,7 +4,7 @@ using namespace std;
 
 csvtojson::csvtojson(){}
 
-void csvtojson::printcsv(string name, int datarows)
+void csvtojson::printcsv(string name, int datarows, ostream &o)
 {
     //Check name if it has .csv
     string csvfile;
@@ -64,7 +64,7 @@ void csvtojson::printcsv(string name, int datarows)
             }
             else
             {
-                cout << temp;
+                o << temp;
             }
             
         }

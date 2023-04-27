@@ -13,7 +13,7 @@ class csvtojson
 {
     public:
         csvtojson();
-        void printcsv(string name, int datarows);
+        void printcsv(string name, int datarows, ostream &o);
     private:
 
 };
