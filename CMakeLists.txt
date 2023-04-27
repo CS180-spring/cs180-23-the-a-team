@@ -7,11 +7,11 @@ ADD_SUBDIRECTORY(googletest)
 
 ADD_EXECUTABLE(FriendlyCDB
 
-    main.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp 
+    main.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp
 )
 
 ADD_EXECUTABLE(test
-    unittest.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp
+    unittest.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp
 
    
 )

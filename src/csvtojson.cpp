@@ -2,7 +2,6 @@
 
 using namespace std;
 
-csvtojson::csvtojson(){}
 
 void csvtojson::printcsv(string name, int datarows, ostream& output)
 {

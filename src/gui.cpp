@@ -115,6 +115,13 @@ void gui::login()
 };
 void gui::menu(bool &user)
 {
+
+    csvtojson c;
+    string name;
+    int sizeofdata;
+    stringstream outputofcsv;
+    Parser p;
+
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
     cout << "|----------------------------------------|" << endl;
@@ -129,6 +136,8 @@ void gui::menu(bool &user)
     cout << "|      6. Query documents                |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      7. Logout                         |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      8. READ CSV document              |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -139,6 +148,8 @@ void gui::menu(bool &user)
         // listCollections();
         break;
     case 2:
+        p.parseJson();
+        //p.parseError();
         // readDocument();
         break;
     case 3:
@@ -157,6 +168,15 @@ void gui::menu(bool &user)
         cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED OUT   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
              << endl;
         user = false;
+        break;
+    case 8:
+    cout << "PLEASE input csv file to ..[ProjectFolder]/Inputs/" << endl;
+    cout << "Enter the name of your csv file(no spaces): ";
+    cin >> name;
+    cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+    cin >> sizeofdata;
+    c.printcsv(name, sizeofdata, outputofcsv);
+    outputofcsv.str();
         break;
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"

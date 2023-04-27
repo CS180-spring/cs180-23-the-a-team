@@ -1,7 +1,10 @@
 #ifndef GUI_H
 #define GUI_H
 
+#include "parser.h"
 #include <iostream>
+#include <fstream>
+#include "csvtojson.h"
 
 class gui
 {
