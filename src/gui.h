@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "csvtojson.h"
+#include "json.h"
 
 class gui
 {

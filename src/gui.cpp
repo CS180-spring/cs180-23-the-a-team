@@ -121,6 +121,7 @@ void gui::menu(bool &user)
     int sizeofdata;
     stringstream outputofcsv;
     Parser p;
+    json j;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
@@ -138,6 +139,8 @@ void gui::menu(bool &user)
     cout << "|      7. Logout                         |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      8. READ CSV document              |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      9. Write a document               |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -178,6 +181,10 @@ void gui::menu(bool &user)
     c.printcsv(name, sizeofdata, outputofcsv);
     outputofcsv.str();
         break;
+
+        case 9:
+            j.writeJson();
+            break;
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
              << endl;

@@ -17,7 +17,7 @@ void json::writeJson() {
     data += "  \"College\": \"" + college + "\"\n";
     data += "}\n";
 
-    ofstream outfile("data.json");
+    ofstream outfile("out.json");
     outfile << data;
     outfile.close();
 
