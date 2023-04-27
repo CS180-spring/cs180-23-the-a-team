@@ -1,6 +1,7 @@
 #include "rapidjson/include/rapidjson/document.h"
 #include "src/csvtojson.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main() 
@@ -15,6 +16,6 @@ int main()
     cin >> name;
     cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
     cin >> sizeofdata;
-    c.printcsv(name, sizeofdata);
+    c.printcsv(name, sizeofdata, cout);
     return 0;
 }

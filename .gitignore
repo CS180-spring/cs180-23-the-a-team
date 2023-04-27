@@ -10,4 +10,5 @@ test
 bin/
 rapidjson/test/unittest/
 build/
-
+settings.json
+lib/
