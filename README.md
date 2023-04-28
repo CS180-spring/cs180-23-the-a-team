@@ -25,7 +25,7 @@ General document database for information/document storage running in a console.
 - Feature 4: search for unique identifiers 
 - Feature 5: csv to json
 
-- **User friendly interface:**
+- **User friendly interface Documentation:**
 <img width="450" alt="Screen Shot 2023-04-24 at 12 10 49 PM" src="Screenshot 2023-04-27 at 1.02.22 AM.png">
 <img width="450" alt="Screen Shot 2023-04-24 at 12 10 49 PM" src="Screenshot 2023-04-27 at 1.02.53 AM.png">
 <img width="450" alt="Screen Shot 2023-04-24 at 12 10 49 PM" src="Screenshot 2023-04-27 at 1.03.06 AM.png">
@@ -33,3 +33,6 @@ General document database for information/document storage running in a console.
 ## Class Diagram
 [FriendlyCDB_UML](https://lucid.app/documents/embedded/2fd26883-22f0-4d6a-bd90-33ecd24ce9b5#)
 ![Alt text](CS180UML.png)
+
+## Burndown Chart Updated as of 4/27/2023
+![Alt text](BurdownChart.png)
