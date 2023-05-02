@@ -6,7 +6,6 @@ ADD_SUBDIRECTORY(googletest)
 #ADD_SUBDIRECTORY(rapidjson)
 
 ADD_EXECUTABLE(FriendlyCDB
-
     main.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp
 )
 
@@ -16,6 +15,6 @@ ADD_EXECUTABLE(test
    
 )
 
-
+#set(FriendlyCDB "${FriendlyCDB} -std=c++17")
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)
