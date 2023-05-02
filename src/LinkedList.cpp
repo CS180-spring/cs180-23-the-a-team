@@ -12,10 +12,10 @@ LinkedList::~LinkedList()
 	}
 }
 
-void LinkedList::insertToRear(const ItemType& val)
+void LinkedList::insertToRear(vector<pair<string, string>> data)
 {
 	Node* n = new Node, * temp = head;
-	n->value = val;
+	n->data = data;
 	n->next = nullptr;
 
 	if (head == nullptr)
@@ -29,24 +29,13 @@ void LinkedList::insertToRear(const ItemType& val)
 		tail = n;
 	}
 }
-void LinkedList::printList() const
-{
-	Node* temp = head;
-	while (temp != nullptr)
-	{
-		cout << temp->value << " ";
-		temp = temp->next;
-	}
 
-	cout << endl;
-}
-ItemType& LinkedList::get(int i) const
+bool LinkedList::deleteNode(int i) const
 {
 	Node* temp = head;
-	ItemType& Item = temp->value;
 
 	if (head == nullptr)
-		return Item;
+		return false;
 
 	int k = 0;
 
@@ -54,14 +43,38 @@ ItemType& LinkedList::get(int i) const
 	{
 		if (i == k)
 		{
-			Item = temp->value;
-			return Item;
+			temp->prev->next = temp->next;
+			temp->next->prev = temp->prev;
+			delete temp;
+			return true;
 		}
 		k++;
 		temp = temp->next;
 	}
 
-	return Item;
+	return false;
+}
+
+vector<pair<string, string>> LinkedList::get(int i) const
+{
+	Node* temp = head;
+
+	if (head == nullptr)
+		return head->data;
+
+	int k = 0;
+
+	while (temp != nullptr)
+	{
+		if (i == k)
+		{
+			return temp->data;
+		}
+		k++;
+		temp = temp->next;
+	}
+
+	return temp->data;
 }
 int LinkedList::size() const
 {
