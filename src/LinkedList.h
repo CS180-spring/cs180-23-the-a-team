@@ -8,7 +8,7 @@ typedef std::string ItemType;
 
 struct Node
 {
-	std::vector<std::pair<string, string>> data;
+	std::vector<std::pair<std::string, std::string>> data;
 	Node* next;
 	Node* prev;
 };
