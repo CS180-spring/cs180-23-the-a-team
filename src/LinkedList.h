@@ -26,11 +26,11 @@ public:
 	~LinkedList();
 	bool deleteNode(int i) const;
 	// Inserts val at the rear of the list       
-	void insertToRear(std::vector<std::pair<string, string>> data);
-	// Sets item to the value at position i in this       
+	void insertToRear(std::vector<std::pair<std::string, std::string>> data);
+	// Sets item to the value at position i stin this       
 	// LinkedList and return true, returns false if        
 	// there is no element i 
-	std::vector<std::pair<string, string>> get(int i) const;
+	std::vector<std::pair<std::string, std::string>> get(int i) const;
 	// Reverses the LinkedList       
 	// Returns the number of items in the Linked List.       
 	int size() const;
