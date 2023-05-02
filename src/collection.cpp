@@ -1,5 +1,7 @@
 #include "collection.h"
 
+namespace fs = std::experimental::filesystem;
+
     Collection::Collection()
     {
         DIR *directory;
@@ -30,15 +32,21 @@
     }
     void Collection::AddCollection(string name)
     {
+        string dname = "Database/" + name;
+        const char* d = dname.c_str();
+        fs::create_directories(d);
+
+        /*
         string directoryname = "Database/";
         const char* d = directoryname.c_str();
         mkdir(d, 0777);
 
         if (mkdir(d, 0777) == -1)
         cerr << "Error :  " << strerror(errno) << endl;
- 
-    else
-        cout << "Directory created";
+        else
+            cout << "Directory created";
+        }
+        */
     }
     void Collection::DeleteCollection(string name)
     {
