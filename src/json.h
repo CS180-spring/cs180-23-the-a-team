@@ -3,14 +3,13 @@
 
 #include <iostream>
 #include <fstream>
-#include "LinkedList.h"
+#include "collection.h"
 
 class json
 {
     public:
             void writeJson();
     private:
-            LinkedList* jsondata = new LinkedList();
 };
 
 #endif
