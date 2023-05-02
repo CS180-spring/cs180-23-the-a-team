@@ -10,7 +10,7 @@ class json
     public:
             void writeJson();
     private:
-
+            LinkedList* jsondata = new LinkedList();
 };
 
 #endif
