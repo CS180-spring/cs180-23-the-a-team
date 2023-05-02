@@ -2,12 +2,13 @@
 #define LINKEDLIST_H
 
 #include <iostream> 
-#include <string>          
+#include <string>   
+#include <vector>       
 typedef std::string ItemType;
 
 struct Node
 {
-	ItemType value;
+	std::vector<std::pair<string, string>> data;
 	Node* next;
 	Node* prev;
 };
