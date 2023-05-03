@@ -10,7 +10,7 @@
 #include <bits/stdc++.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <experimental/filesystem>
+#include <filesystem>
 
 using namespace std;
 
@@ -22,9 +22,11 @@ class Collection
             void AddCollection(string name);
             void DeleteCollection(string name);
             void ViewCollection(string name);
+            void ViewAllCollections();
             bool checkIFFolder(string s);
+            bool verifyCollectionExist(string name);
     private:
-            string name;
+           // string name;
 
 };
 
