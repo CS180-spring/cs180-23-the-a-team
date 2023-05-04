@@ -65,7 +65,7 @@ class Json : public Collection
 
     private:
         fstream file;
-        LinkedList* jsondata;
+        LinkedList* jsondata = new LinkedList();
         string directory;
 };
 
