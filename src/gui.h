@@ -6,6 +6,8 @@
 #include <fstream>
 #include "csvtojson.h"
 #include "json.h"
+#include <filesystem>
+#include "collection.h"
 
 class gui
 {

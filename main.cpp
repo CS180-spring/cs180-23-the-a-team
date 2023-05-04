@@ -5,11 +5,17 @@
 #include <fstream>
 #include <sstream>
 #include "src/gui.h"
+#include "src/collection.h"
 
 using namespace std;
 
 int main() 
 {
+    Collection c("this3");
+    c.AddCollection("this3");
+    c.AddCollection("this4");
+    c.DeleteCollection("this3");
+    c.ViewAllCollections();
      gui Gui;
      Gui.main();
     return 0;

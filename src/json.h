@@ -5,10 +5,19 @@
 #include <fstream>
 #include "collection.h"
 #include <vector>
+#include "LinkedList.h"
+#include "parser.h"
 
-class json
+using namespace std;
+
+class json : public collection
 {
     public:
+            json(){}
+            void intiializeEMPTYjson(string collectionname, string jsonname);
+            void importJson();
+            void view();
+            void edit(vector<pair<string, string>> &data);
             void writeJson();
             void delNode(int id)
             {
@@ -20,6 +29,9 @@ class json
                 jsondata->insertToRear(empty);
             }
     private:
+        fstream file;
+        LinkedList* jsondata = new LinkedList();
+        string directory;
 };
 
 #endif
