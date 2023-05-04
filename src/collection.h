@@ -18,6 +18,14 @@ using namespace std;
 class Collection
 {
     public:
+            collection()
+            {}
+            // void test()
+            // {
+            //     Node* n = new Node();
+            //     std::pair t = std::make_pair(std::string("lightbulbs"),std::string("test"));
+            //     jsondata->insertToRear({t});
+            // }    
             Collection();
             Collection(string name);
             void AddCollection(string name);

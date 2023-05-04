@@ -1,4 +1,5 @@
 #include "gui.h"
+#include "json.h"
 #include "authentication.h"
 
 using namespace std;
@@ -115,10 +116,13 @@ void gui::login()
 };
 void gui::menu(bool &user)
 {
+
     csvtojson c;
     string name;
     int sizeofdata;
     stringstream outputofcsv;
+    //Parser p; moved it to json file
+   Json j;
     Parser p;
     json j;
     //Collection col;
@@ -153,6 +157,9 @@ void gui::menu(bool &user)
         // listCollections();
         break;
     case 2:
+        //check for any errors first before parsing
+        j.parseError();
+        j.parseJson();
         p.parseJson();
         //p.parseError();
         // readDocument();
@@ -183,7 +190,12 @@ void gui::menu(bool &user)
     c.printcsv(name, sizeofdata, outputofcsv);
     outputofcsv.str();
         break;
-        
+        case 9:
+            j.writeJson();
+            break;
+    default:
+        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
+             << endl;
         case 9:
             j.writeJson();
             break;
