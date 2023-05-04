@@ -34,6 +34,8 @@ public:
 	// Returns the number of items in the Linked List.       
 	int size() const;
 
+	
+
 	void insertToFront(std::vector<std::pair<std::string, std::string>> data){}; //Be able to insert in front
 };
 #endif

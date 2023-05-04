@@ -87,6 +87,8 @@ void Json::importJson()
 void Json::view()
 {
     int choice;
+    int counter = 0;
+    vector<pair<string, string>> show;
     cout << "Use number 1 to 3 to control viewer" << endl;
     cout << "1. Edit" << endl;
     cout << "2. Previous" << endl;
@@ -95,16 +97,33 @@ void Json::view()
     do
     {
         //Show the Node
+        cout << "b" << endl;
+        show = jsondata->get(counter);
+        cout << "t" << endl;
+        for(int i = 0; i < show.size() ; i++)
+        {
+            cout << " '" << show[i].first << "' : " << show[i].second << endl;
+        }
         cin >> choice;
         switch(choice)
         {
             case 1:
-                //call edit 
+                //call edit
+                //edit(show);
+                
                 break;
             case 2:
+                counter--;
+                if(counter < 1)
+                {
+                    counter = 1;
+                }
+                show.clear();
                 //go to previous node
                 break;
             case 3:
+                show.clear();
+                counter++;
                 //go to next node
                 break;
             case 99:
@@ -122,7 +141,7 @@ void Json::view()
     
 }
 
-void Json::edit(vector<pair<string, string>> &data)
+void Json::edit(vector<pair<string, string>> data)
 {
     int choice;
     cout << "Enter the number of which attribute, would you like to edit" << endl;
@@ -222,7 +241,7 @@ void Json::parseJson()
 
         result.push_back(information[i]);
     }
-
+    cout << "Size of LinkedList:" << jsondata->size() << endl;
     /*
     for(const auto& p: information) {
         cout << p.Jsonkey << " : " << p.Jsonval << endl;

@@ -52,7 +52,7 @@ class Json : public Collection
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
         void view();
-        void edit(vector<pair<string, string>> &data);
+        void edit(vector<pair<string, string>> data);
         void delNode(int id)
         {
             jsondata->deleteNode(id);
