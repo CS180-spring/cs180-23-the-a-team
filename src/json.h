@@ -31,7 +31,9 @@ using namespace std;
 class Json : public Collection
 {
     public:
-        Json() {} //default constructor
+        Json() {
+            LinkedList* jsondata = new LinkedList();
+        } //default constructor
         Json(string cname, string jname);
         /*
         struct pairofjson
@@ -65,7 +67,7 @@ class Json : public Collection
 
     private:
         fstream file;
-        LinkedList* jsondata = new LinkedList();
+        LinkedList* jsondata;
         string directory;
 };
 
