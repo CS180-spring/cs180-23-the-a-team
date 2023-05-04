@@ -40,18 +40,27 @@ void Json::setDirectoryJson(string cname, string jname)
 
 //try to use rapidjson
 void Json::writeJson() {
-    vector<int> myVector = {1, 2, 3, 4, 5};
-    //string filename = "vector_contents.json";
-    string filename = "Database/" + getColName() + "/writetest.json";
+     struct Person {
+        string id;
+        string name;
+        int age;
+        string college;
+    };
+
+    vector<Person> people = {{"98e89r8983009id", "Golnaz", 27, "UC Berkeley"}};
+    string filename = "output.json";
     
     ofstream outputFile(filename);
     if (outputFile.is_open()) {
-        outputFile << "{\n\t\"numbers\": [";
-        for (size_t i = 0; i < myVector.size(); ++i) {
+        outputFile << "{\n\t\"Data\": [";
+        for (size_t i = 0; i < people.size(); ++i) {
             if (i != 0) {
                 outputFile << ", ";
             }
-            outputFile << myVector[i];
+            outputFile << "{\n\t\t\"id\": \"" << people[i].id << "\",\n";
+            outputFile << "\t\t\"name\": \"" << people[i].name << "\",\n";
+            outputFile << "\t\t\"age\": " << people[i].age << ",\n";
+            outputFile << "\t\t\"college\": \"" << people[i].college << "\"\n\t}";
         }
         outputFile << "]\n}";
         outputFile.close();
