@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "collection.h"
+#include <vector>
 
 class json
 {
@@ -15,8 +16,8 @@ class json
             }
             void addEmptyJson()
             {
-                Value empty_json(kObjectType);
-                jsondata->insertToRear(empty_json);
+                std::vector<std::pair<std::string, std::string>> empty;
+                jsondata->insertToRear(empty);
             }
     private:
 };
