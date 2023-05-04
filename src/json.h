@@ -45,6 +45,7 @@ class Json : public Collection
         vector<pairofjson> information;
         */
         void setDirectoryJson(string cname, string jname);  
+        void setfullDirectory(string n);
         void writeJson();
         void parseError();
         void parseJson(); 

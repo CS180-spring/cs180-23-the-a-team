@@ -124,7 +124,7 @@ void gui::menu(bool &user)
     //Parser p; moved it to json file
     Json j;
     Collection col;
-    string temp;
+    string temp, temp2;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
@@ -145,9 +145,13 @@ void gui::menu(bool &user)
     cout << "|----------------------------------------|" << endl;
     cout << "|      9. Write a document               |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      10. Add a collectioon             |" << endl;
+    cout << "|      10. Add a collection              |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      11. Delete a collection           |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      12. Import Json document          |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      13. JSON viewer                   |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -160,7 +164,15 @@ void gui::menu(bool &user)
         break;
     case 2:
         //check for any errors first before parsing
-        j.parseError();
+        cout << "Enter collection name(no spaces): ";
+        cin >> temp;
+        cout << "Enter the Json name(no spaces): " << endl;
+        cin >> temp2;
+       // getline(cin , temp2);
+        //cin.ignore(1024, '\n');
+        //cin.clear();
+        j.setDirectoryJson(temp, temp2);
+        //j.parseError();
         j.parseJson();
         //p.parseJson();
         //p.parseError();
@@ -207,7 +219,15 @@ void gui::menu(bool &user)
             cout << "Please enter in the collection name(no spaces): ";
             cin >> temp;
             col.DeleteCollection(temp);
-            
+            break;
+        case 12:
+                cin.ignore(1024, '\n');
+                cin.clear();
+                j.importJson();
+                break;
+        case 13:
+                j.view();
+                break;
         default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
         break;

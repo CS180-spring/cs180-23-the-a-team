@@ -17,6 +17,11 @@ Json::Json(string cname, string jname)
     
 }
 
+void Json::setfullDirectory(string n)
+{
+    directory = n;
+}
+
 void Json::setDirectoryJson(string cname, string jname)
 {
     collectionName = cname;
@@ -63,12 +68,18 @@ void Json::intiializeEMPTYjson(string collectionname, string jsonname)
 //Parser could go under here
 void Json::importJson()
 {
-    string d;
+    //Add string manipulation for getting name automatically
+    string d,d2,d3;
     cout << "Please write the path of your input Json: " << endl;
     getline(cin, d);
+    cout << "Please enter the collection name(no spaces): ";
+    cin >> d2;
+    cout << "Enter in name of json to be created(no spaces): ";
+    cin >> d3;
+    setDirectoryJson(d2,d3);
     file.open(d);
-    std::ifstream  From(d, ios::binary);
-    std::ofstream  To(directory, ios::binary);
+    ifstream  From(d, ios::binary);
+    ofstream  To(directory, ios::binary);
     To << From.rdbuf();
     
 }
