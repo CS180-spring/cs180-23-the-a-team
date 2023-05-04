@@ -47,12 +47,17 @@ void Json::writeJson() {
         string college;
     };
 
-    vector<Person> people = {{"98e89r8983009id", "Golnaz", 27, "UC Berkeley"}};
+    vector<Person> people = {
+        {"9873e87e879ueid", "Farnaz", 23, "UC Riverside"},
+        {"98e89r8983009id", "Golnaz", 27, "UC Berkely"},
+        {"9898378747382id", "Niloofar", 30, "UCLA"},
+        {"959067fs9d798id", "Muneeb", 23, "UC Riverside"}
+    };
     string filename = "output.json";
     
     ofstream outputFile(filename);
     if (outputFile.is_open()) {
-        outputFile << "{\n\t\"Data\": [";
+        outputFile << "{\n\t\"people\": [";
         for (size_t i = 0; i < people.size(); ++i) {
             if (i != 0) {
                 outputFile << ", ";
