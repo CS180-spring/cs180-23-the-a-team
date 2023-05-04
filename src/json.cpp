@@ -241,7 +241,9 @@ void Json::parseJson()
 
         result.push_back(information[i]);
     }
+    jsondata->insertToRear(result);
     cout << "Size of LinkedList:" << jsondata->size() << endl;
+    view();
     /*
     for(const auto& p: information) {
         cout << p.Jsonkey << " : " << p.Jsonval << endl;
