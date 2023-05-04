@@ -1,5 +1,7 @@
 #include "gui.h"
 #include "json.h"
+#include "authentication.h"
+
 using namespace std;
 bool user = false;
 void gui::main()
@@ -121,6 +123,9 @@ void gui::menu(bool &user)
     stringstream outputofcsv;
     //Parser p; moved it to json file
    Json j;
+    Parser p;
+    json j;
+    //Collection col;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
@@ -140,6 +145,8 @@ void gui::menu(bool &user)
     cout << "|      8. READ CSV document              |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      9. Write a document               |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      10. Add a collectioon             |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -153,6 +160,8 @@ void gui::menu(bool &user)
         //check for any errors first before parsing
         j.parseError();
         j.parseJson();
+        p.parseJson();
+        //p.parseError();
         // readDocument();
         break;
     case 3:
@@ -181,13 +190,20 @@ void gui::menu(bool &user)
     c.printcsv(name, sizeofdata, outputofcsv);
     outputofcsv.str();
         break;
-
         case 9:
             j.writeJson();
             break;
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
              << endl;
+        case 9:
+            j.writeJson();
+            break;
+        case 10:
+            //col.AddCollection("testingFileSystem");
+            break;
+        default:
+        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
         break;
     }
 };
