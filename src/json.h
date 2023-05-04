@@ -31,9 +31,7 @@ using namespace std;
 class Json : public Collection
 {
     public:
-        Json() {
-            LinkedList* jsondata = new LinkedList();
-        } //default constructor
+        Json() {} //default constructor
         Json(string cname, string jname);
         /*
         struct pairofjson
