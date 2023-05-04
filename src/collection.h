@@ -18,8 +18,6 @@ using namespace std;
 class Collection
 {
     public:
-            collection()
-            {}
             // void test()
             // {
             //     Node* n = new Node();
@@ -28,6 +26,8 @@ class Collection
             // }    
             Collection();
             Collection(string name);
+            void addcolName(string name);
+            string getColName();
             void AddCollection(string name);
             void DeleteCollection(string name);
             void ViewCollection(string name);
@@ -43,6 +43,7 @@ class Collection
     private:
     protected:
             LinkedList* jsondata = new LinkedList();
+            string collectionName;
 };
 
 #endif

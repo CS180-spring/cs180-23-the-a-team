@@ -28,10 +28,12 @@ using namespace std;
 #include "parser.h"
 
 
-class Json
+class Json : public Collection
 {
     public:
         Json() {} //default constructor
+        Json(string cname, string jname);
+        /*
         struct pairofjson
         {
         //rapidjson::Value JsonKey;
@@ -39,25 +41,26 @@ class Json
         string Jsonval;
         //rapidjson::Value JsonValue; 
         };
-        vector<pairofjson> information;  
+        
+        vector<pairofjson> information;
+        */
+        void setDirectoryJson(string cname, string jname);  
         void writeJson();
         void parseError();
         void parseJson(); 
-            json(){}
-            void intiializeEMPTYjson(string collectionname, string jsonname);
-            void importJson();
-            void view();
-            void edit(vector<pair<string, string>> &data);
-            void writeJson();
-            void delNode(int id)
-            {
-                    jsondata->delNode(id);
-            }
-            void addEmptyJson()
-            {
-                std::vector<std::pair<std::string, std::string>> empty;
-                jsondata->insertToRear(empty);
-            }
+        void intiializeEMPTYjson(string collectionname, string jsonname);
+        void importJson();
+        void view();
+        void edit(vector<pair<string, string>> &data);
+        void delNode(int id)
+        {
+            jsondata->deleteNode(id);
+        }
+        void addEmptyJson()
+        {
+            std::vector<std::pair<std::string, std::string>> empty;
+            jsondata->insertToRear(empty);
+        }
 
     private:
         fstream file;

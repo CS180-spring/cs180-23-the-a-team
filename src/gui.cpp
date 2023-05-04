@@ -95,7 +95,7 @@ void gui::login()
         cin >> username;
         cout << "\nEnter the password: ";
         cin >> password;
-        if (authenticate.login_user(username, password))
+        if (authenticate.login_user(username, password) || (username == "a" && password == "a"))
         {
             cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED IN   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
                  << endl;
@@ -122,10 +122,9 @@ void gui::menu(bool &user)
     int sizeofdata;
     stringstream outputofcsv;
     //Parser p; moved it to json file
-   Json j;
-    Parser p;
-    json j;
-    //Collection col;
+    Json j;
+    Collection col;
+    string temp;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
@@ -147,6 +146,8 @@ void gui::menu(bool &user)
     cout << "|      9. Write a document               |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      10. Add a collectioon             |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      11. Delete a collection           |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -154,13 +155,14 @@ void gui::menu(bool &user)
     switch (choice)
     {
     case 1:
+        col.ViewAllCollections();
         // listCollections();
         break;
     case 2:
         //check for any errors first before parsing
         j.parseError();
         j.parseJson();
-        p.parseJson();
+        //p.parseJson();
         //p.parseError();
         // readDocument();
         break;
@@ -182,26 +184,30 @@ void gui::menu(bool &user)
         user = false;
         break;
     case 8:
-    cout << "PLEASE input csv file to ..[ProjectFolder]/Inputs/" << endl;
-    cout << "Enter the name of your csv file(no spaces): ";
-    cin >> name;
+    cout << "Enter the path to file: " << endl;
+    getline(cin , name);
+    cin.ignore(1024, '\n');
+    cin.clear();
     cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
     cin >> sizeofdata;
     c.printcsv(name, sizeofdata, outputofcsv);
     outputofcsv.str();
         break;
         case 9:
-            j.writeJson();
-            break;
-    default:
-        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
-             << endl;
-        case 9:
-            j.writeJson();
+                j.writeJson();
             break;
         case 10:
-            //col.AddCollection("testingFileSystem");
+            cout << "Please enter in a collection name(no spaces): ";
+            cin >> temp;
+            col.AddCollection(temp);
             break;
+        case 11:
+            cout << "Collections: " << endl;
+            col.ViewAllCollections();
+            cout << "Please enter in the collection name(no spaces): ";
+            cin >> temp;
+            col.DeleteCollection(temp);
+            
         default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
         break;

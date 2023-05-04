@@ -34,9 +34,18 @@ using namespace std;
         AddCollection(name);
     }
 
+    void Collection::addcolName(string name)
+    {
+        collectionName = name;
+    }
+
+    string Collection::getColName()
+    {
+        return collectionName;
+    }
+
     void Collection::AddCollection(string name)
     {
-        //this ->name = name;
         string dname = "Database/" + name;
         const char* d = dname.c_str();
         fs::create_directories(d);
@@ -99,7 +108,7 @@ using namespace std;
                 }
                 else
                 {
-                    cout << "File: " << dent->d_name << endl;
+                    //cout << "File: " << dent->d_name << endl;
                 }
             }
         } while (dent);
@@ -122,9 +131,10 @@ using namespace std;
     {
         DIR *directory;
         struct dirent* dent;
-        string n = "Database/" + name;
+        string n = "Database/";
         const char* d = n.c_str();
-        directory=opendir(d); 
+        directory=opendir(d);
+        cout << "137";
         do 
         {
             dent = readdir(directory);
@@ -133,7 +143,7 @@ using namespace std;
                 cout << "dent->d_name: " << dent->d_name << endl;
                 if(checkIFFolder(dent->d_name) && (dent->d_name == name))
                 {
-                    cout << "here135";
+                    cout << "here146";
                     return true;
                 }
             }

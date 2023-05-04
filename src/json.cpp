@@ -2,10 +2,42 @@
 
 using namespace std;
 
+Json::Json(string cname, string jname)
+{
+    collectionName = cname;
+    if(verifyCollectionExist(cname)) //parent function
+    {
+        setDirectoryJson(cname, jname);
+    }
+    else
+    {
+        AddCollection(cname); //parent function
+        setDirectoryJson(cname, jname);
+    }
+    
+}
 
+void Json::setDirectoryJson(string cname, string jname)
+{
+    collectionName = cname;
+    if( verifyCollectionExist(cname)) //parent function
+    {
+        directory = "Database/" + cname + "/" + jname;
+    }
+    else
+    {
+        AddCollection(cname); //parent function
+        directory = "Database/" + cname + "/" + jname;
+    }
+    cout << "Directory Successful: " << directory << endl;
+    //check if directory already exists
+}
+
+//try to use rapidjson
 void Json::writeJson() {
     vector<int> myVector = {1, 2, 3, 4, 5};
-    string filename = "vector_contents.json";
+    //string filename = "vector_contents.json";
+    string filename = "Database/" + getColName() + "/writetest.json";
     
     ofstream outputFile(filename);
     if (outputFile.is_open()) {
@@ -21,7 +53,7 @@ void Json::writeJson() {
     }
 }
 
-void json::intiializeEMPTYjson(string collectionname, string jsonname)
+void Json::intiializeEMPTYjson(string collectionname, string jsonname)
 {
     directory = "Database/" + collectionname + jsonname;
     file.open(directory);
@@ -29,12 +61,19 @@ void json::intiializeEMPTYjson(string collectionname, string jsonname)
 }
 
 //Parser could go under here
-void json::importJson()
+void Json::importJson()
 {
+    string d;
+    cout << "Please write the path of your input Json: " << endl;
+    getline(cin, d);
+    file.open(d);
+    std::ifstream  From(d, ios::binary);
+    std::ofstream  To(directory, ios::binary);
+    To << From.rdbuf();
     
 }
 
-void json::view()
+void Json::view()
 {
     int choice;
     cout << "Use number 1 to 3 to control viewer" << endl;
@@ -72,7 +111,7 @@ void json::view()
     
 }
 
-void json::edit(vector<pair<string, string>> &data)
+void Json::edit(vector<pair<string, string>> &data)
 {
     int choice;
     cout << "Enter the number of which attribute, would you like to edit" << endl;
@@ -95,7 +134,8 @@ void json::edit(vector<pair<string, string>> &data)
     cin >> data[choice].second; //later should be getline
 }
 
-void json::writeJson() {
+/*
+void Json::writeJson() {
 
     cout << "here";
     string id = "7343d87e623urfd";
@@ -116,8 +156,8 @@ void json::writeJson() {
 
     cout << "\nfinal\n";
 }
-
-Json::parseError()
+*/
+void Json::parseError()
 {
      //handle parsing error
     ifstream file("data.json");
@@ -134,9 +174,9 @@ Json::parseError()
     }
 
 }
-Json::parseJson()
+void Json::parseJson()
 {
-    ifstream file("data.json");   
+    ifstream file(directory);   
     IStreamWrapper isw(file);
 
     Document doc;
@@ -146,21 +186,19 @@ Json::parseJson()
         cout << "Document must be an array" << endl;
     }
     for (auto& itr : doc.GetArray()) {
-            pairofjson pair;
             for (auto& obj : itr.GetObject()) {
+                pair t = make_pair(string(obj.name.GetString()),string(obj.value.GetString()));
+                //jsondata->insertToRear();
+                /*
                 pair.Jsonkey = obj.name.GetString();
                 pair.Jsonval = obj.value.GetString();
-                information.push_back(pair);
+                //information.push_back(pair);
+                */
             }
         }
-
+    /*
     for(const auto& p: information) {
         cout << p.Jsonkey << " : " << p.Jsonval << endl;
     }
-
-
-void json::edit(Node *)
-{
-    
-
+    */
 }
