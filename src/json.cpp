@@ -181,6 +181,7 @@ void Json::parseJson()
 
     Document doc;
     doc.ParseStream(isw);
+    vector<pair<string, string>> information;
     //struct pairofjson s;
     if (!doc.IsArray()) {
         cout << "Document must be an array" << endl;
@@ -188,6 +189,7 @@ void Json::parseJson()
     for (auto& itr : doc.GetArray()) {
             for (auto& obj : itr.GetObject()) {
                 pair t = make_pair(string(obj.name.GetString()),string(obj.value.GetString()));
+                information.push_back(t);
                 //jsondata->insertToRear();
                 /*
                 pair.Jsonkey = obj.name.GetString();
@@ -196,6 +198,20 @@ void Json::parseJson()
                 */
             }
         }
+    
+    string firstentry = information[0].first;
+    vector<pair< string, string>> result;
+    for(int i = 0; i < information.size(); i++)
+    {
+        if(information[i].first == firstentry && i != 0)
+        {
+            jsondata->insertToRear(result);
+            result.clear();
+        }
+
+        result.push_back(information[i]);
+    }
+
     /*
     for(const auto& p: information) {
         cout << p.Jsonkey << " : " << p.Jsonval << endl;
