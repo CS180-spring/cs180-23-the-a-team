@@ -18,7 +18,7 @@ void gui::main()
 
         if (user)
         {
-            welcome();
+           
             menu(user);
         }
 

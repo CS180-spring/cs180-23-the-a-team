@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <filesystem>
+#include "LinkedList.h"
 
 using namespace std;
 
@@ -25,9 +26,15 @@ class Collection
             void ViewAllCollections();
             bool checkIFFolder(string s);
             bool verifyCollectionExist(string name);
+            void test()
+            {
+                Node* n = new Node();
+                std::pair t = std::make_pair(std::string("lightbulbs"),std::string("test"));
+                jsondata->insertToRear({t});
+            }    
     private:
-           // string name;
-
+    protected:
+            LinkedList* jsondata = new LinkedList();
 };
 
 #endif
