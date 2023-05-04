@@ -4,6 +4,21 @@ using namespace std;
 
 
 void Json::writeJson() {
+    vector<int> myVector = {1, 2, 3, 4, 5};
+    string filename = "vector_contents.json";
+    
+    ofstream outputFile(filename);
+    if (outputFile.is_open()) {
+        outputFile << "{\n\t\"numbers\": [";
+        for (size_t i = 0; i < myVector.size(); ++i) {
+            if (i != 0) {
+                outputFile << ", ";
+            }
+            outputFile << myVector[i];
+        }
+        outputFile << "]\n}";
+        outputFile.close();
+    }
 }
 
 void json::intiializeEMPTYjson(string collectionname, string jsonname)
