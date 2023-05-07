@@ -122,7 +122,6 @@ void gui::menu(bool &user)
     int sizeofdata;
     stringstream outputofcsv;
     //Parser p; moved it to json file
-    Json j;
     Collection col;
     string temp, temp2;
 
@@ -173,7 +172,7 @@ void gui::menu(bool &user)
         //cin.clear();
         j.setDirectoryJson(temp, temp2);
         //j.parseError();
-        j.parseJson(jsondata);
+        j.parseJson();
         //p.parseJson();
         //p.parseError();
         // readDocument();
@@ -226,7 +225,7 @@ void gui::menu(bool &user)
                 j.importJson();
                 break;
         case 13:
-                j.view(jsondata);
+                j.view();
                 break;
         default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;

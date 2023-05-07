@@ -20,6 +20,7 @@ class gui
          void login();
          void menu(bool& user);
          LinkedList jsondata;
+         Json j;
         
 };
 

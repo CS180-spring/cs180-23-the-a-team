@@ -48,10 +48,10 @@ class Json : public Collection
         void setfullDirectory(string n);
         void writeJson();
         void parseError();
-        void parseJson(LinkedList &jsondata); 
+        void parseJson(); 
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
-        void view(LinkedList &jsondata);
+        void view();
         void edit(vector<pair<string, string>> data);
         void delNode(int id)
         {
@@ -65,7 +65,7 @@ class Json : public Collection
 
     private:
         fstream file;
-        //LinkedList* jsondata = new LinkedList();
+        LinkedList* jsondata = new LinkedList();
         string directory;
 };
 
