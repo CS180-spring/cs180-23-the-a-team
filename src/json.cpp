@@ -98,7 +98,7 @@ void Json::importJson()
     
 }
 
-void Json::view()
+void Json::view(LinkedList &jsondata)
 {
     int choice;
     int counter = 0;
@@ -112,7 +112,7 @@ void Json::view()
     {
         //Show the Node
         cout << "b" << endl;
-        show = jsondata->get(counter);
+        show = jsondata.get(counter);
         cout << "t" << endl;
         for(int i = 0; i < show.size() ; i++)
         {
@@ -218,11 +218,11 @@ void Json::parseError()
     }
 
 }
-void Json::parseJson()
+void Json::parseJson(LinkedList &jsondata)
 {
     ifstream file(directory);   
     IStreamWrapper isw(file);
-
+    cout << endl << "RealDirectory: " << directory << endl;
     Document doc;
     doc.ParseStream(isw);
     vector<pair<string, string>> information;
@@ -249,15 +249,15 @@ void Json::parseJson()
     {
         if(information[i].first == firstentry && i != 0)
         {
-            jsondata->insertToRear(result);
+            jsondata.insertToRear(result);
             result.clear();
         }
 
         result.push_back(information[i]);
     }
-    jsondata->insertToRear(result);
-    cout << "Size of LinkedList:" << jsondata->size() << endl;
-    view();
+    jsondata.insertToRear(result);
+    cout << "Size of LinkedList:" << jsondata.size() << endl;
+    view(jsondata);
     /*
     for(const auto& p: information) {
         cout << p.Jsonkey << " : " << p.Jsonval << endl;

@@ -48,24 +48,24 @@ class Json : public Collection
         void setfullDirectory(string n);
         void writeJson();
         void parseError();
-        void parseJson(); 
+        void parseJson(LinkedList &jsondata); 
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
-        void view();
+        void view(LinkedList &jsondata);
         void edit(vector<pair<string, string>> data);
         void delNode(int id)
         {
-            jsondata->deleteNode(id);
+            //.deleteNode(id);
         }
         void addEmptyJson()
         {
             std::vector<std::pair<std::string, std::string>> empty;
-            jsondata->insertToRear(empty);
+            //jsondata.insertToRear(empty);
         }
 
     private:
         fstream file;
-        LinkedList* jsondata = new LinkedList();
+        //LinkedList* jsondata = new LinkedList();
         string directory;
 };
 

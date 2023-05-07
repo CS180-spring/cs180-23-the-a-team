@@ -173,7 +173,7 @@ void gui::menu(bool &user)
         //cin.clear();
         j.setDirectoryJson(temp, temp2);
         //j.parseError();
-        j.parseJson();
+        j.parseJson(jsondata);
         //p.parseJson();
         //p.parseError();
         // readDocument();
@@ -226,7 +226,7 @@ void gui::menu(bool &user)
                 j.importJson();
                 break;
         case 13:
-                j.view();
+                j.view(jsondata);
                 break;
         default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
