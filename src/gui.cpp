@@ -122,7 +122,6 @@ void gui::menu(bool &user)
     int sizeofdata;
     stringstream outputofcsv;
     //Parser p; moved it to json file
-    Json j;
     Collection col;
     string temp, temp2;
 

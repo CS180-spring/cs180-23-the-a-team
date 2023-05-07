@@ -8,6 +8,8 @@
 struct Node
 {
 	std::vector<std::pair<std::string, std::string>> data;
+	int intforsort;
+	std::string stringforsort;
 	Node* next;
 	Node* prev;
 };

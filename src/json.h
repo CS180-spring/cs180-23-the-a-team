@@ -55,12 +55,12 @@ class Json : public Collection
         void edit(vector<pair<string, string>> data);
         void delNode(int id)
         {
-            jsondata->deleteNode(id);
+            //.deleteNode(id);
         }
         void addEmptyJson()
         {
             std::vector<std::pair<std::string, std::string>> empty;
-            jsondata->insertToRear(empty);
+            //jsondata.insertToRear(empty);
         }
 
     private:

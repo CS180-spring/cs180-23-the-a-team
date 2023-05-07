@@ -18,6 +18,7 @@ class gui
          void welcome();
          void login();
          void menu(bool& user);
+         Json j;
         
 };
 

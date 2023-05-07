@@ -222,7 +222,7 @@ void Json::parseJson()
 {
     ifstream file(directory);   
     IStreamWrapper isw(file);
-
+    cout << endl << "RealDirectory: " << directory << endl;
     Document doc;
     doc.ParseStream(isw);
     vector<pair<string, string>> information;
