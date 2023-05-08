@@ -264,3 +264,35 @@ void Json::parseJson()
     }
     */
 }
+
+LinkedList* searchFunc(LinkedList* &jsondata, string searchby, string match)
+{
+    LinkedList* result;
+    vector<pair<string, string>> v = jsondata->get(0);
+    int findattributeindex;
+    for(int i = 0; i < v.size(); i++)
+    {
+        if(searchby == v[i].first)
+        {
+            findattributeindex = i;
+            if( match == v[i].second)
+            {
+                result->insertToRear(jsondata->get(0));
+            }
+            break;
+        }
+    }
+
+    v.clear();
+    for(int i = 1; i < jsondata->size(); i++)
+    {
+        v = jsondata->get(i);
+        if(match == v[findattributeindex].second)
+        {
+            result->insertToRear(jsondata->get(i));
+        }
+        v.clear();
+    }
+
+    return result;
+}
