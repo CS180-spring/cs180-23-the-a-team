@@ -62,7 +62,9 @@ class Json : public Collection
             std::vector<std::pair<std::string, std::string>> empty;
             //jsondata.insertToRear(empty);
         }
-
+        void stringparser(string command);
+        string deleteChars(string &command, char t);
+{
     private:
         fstream file;
         LinkedList* jsondata = new LinkedList();

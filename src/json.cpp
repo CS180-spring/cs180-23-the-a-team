@@ -264,3 +264,50 @@ void Json::parseJson()
     }
     */
 }
+
+void stringparser(string command)
+{
+    deleteChars(command, ' ');
+
+    //Grab first keyword that will be until next space
+    int index = command.find(' ');
+    string temp= command.substr(0,index);
+    string attrib, value;
+    int choice = 0;
+    if(temp == "SEARCH")
+    {
+        choice = 1;
+    }
+    if(temp == "SORT") //not implementing yet
+    {
+        choice = 2;
+    }
+    command.erase(command.begin(), command.begin() + index); //delete keyword
+    deleteChars(command, ' ');
+    deleteChars(command, '"'); //Delete 1st quotattion symbol
+    index = command.find('"');
+    temp = command.substr(0,index);
+    attrib = temp; 
+    command.erase(command.begin(), command.begin() + index+1);
+    deleteChars(command, ' ');
+    deleteChars(command, '[');
+    index = command.find(']');
+    value = command.substr(0,index);
+
+    switch(choice)
+    {
+        case 1: search(jsondata, attrib, value);
+            break;
+        case 2: 
+            break;
+    }
+}
+
+string deleteChars(string &command, char t)
+{
+    //Delete first spaces
+    while(command[0] == t)
+    {
+        command.erase(command.begin(), command.begin());
+    }
+}
