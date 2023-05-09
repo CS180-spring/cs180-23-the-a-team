@@ -122,19 +122,3 @@ LinkedList* LinkedList::sort(string column_name, int option)
 	else return nullptr;
 	return nullptr;
 }
-
-/*
-void LinkedList::reverseList()
-{
-	Node* temp = head, * prevholder = nullptr, * nextholder = nullptr;
-	while (temp != nullptr)
-	{
-		nextholder = temp->next;
-		temp->next = prevholder;
-		prevholder = temp;
-		temp = nextholder;
-	}
-	head = prevholder;
-
-}
-*/
