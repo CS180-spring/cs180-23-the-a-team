@@ -1,6 +1,7 @@
 #include "LinkedList.h"
 #include <iostream>
 #include <ctype.h>
+#include <algorithm>
 using namespace std;
 
 LinkedList::~LinkedList()
@@ -23,13 +24,16 @@ void LinkedList::insertToRear(vector<pair<string, string>> data)
 	{
 		head = n;
 		tail = n;
+		n->id = 0;
 		head->next = tail;
 		tail->prev = head;
+
 	}
 	else
 	{
 		tail->next = n;
 		n->prev = tail;
+		n->id = tail->id + 1;
 		tail = n;
 	}
 }
@@ -49,6 +53,14 @@ bool LinkedList::deleteNode(int i) const
 		{
 			temp->prev->next = temp->next;
 			temp->next->prev = temp->prev;
+			
+			// need to update ids
+			while (temp != nullptr)
+			{
+				temp->next->id = temp->next->id - 1;
+				temp = temp->next;
+			}
+
 			delete temp;
 			return true;
 		}
@@ -97,7 +109,7 @@ int LinkedList::size() const
 // option key
 // 1 = ascending sort
 // 2 = descending sort
-LinkedList* LinkedList::sort(string column_name, int option)
+LinkedList* LinkedList::sortList(string column_name, int option)
 {
 	if (head == nullptr) 
 	{
@@ -137,6 +149,7 @@ LinkedList* LinkedList::sort(string column_name, int option)
 	
 	while (temp != nullptr)
 	{
+		//cout << temp->id << endl;
 		temp->sortkey = stoi(temp->data[index].second);
 		temp = temp->next;
 	}
@@ -145,13 +158,35 @@ LinkedList* LinkedList::sort(string column_name, int option)
 	temp = head;
 	if (option == 1)
 	{
+		vector<pair<int, int>> sortvec;
+		while (temp != nullptr)
+		{
+			int id = temp->id;
+			int sortkey = temp->sortkey;
+    		pair t = make_pair(sortkey,id);
+			sortvec.push_back(t);
+			temp = temp->next;
+		}
 
+		sort(sortvec.begin(), sortvec.end());
+
+		for (int i = 0; i < sortvec.size(); i++)
+		{
+			nList->insertToRear(this->get(sortvec[i].second));
+		}
+
+		newH = nList->head;
+		for (int k = 0; k < nList.size(); k++)
+		{
+			cout << nList->sortkey << endl;
+		}
+
+		return nList;
 	}
 	else if (option == 2)
 	{
-
+		return nList;
 	}
-	else return nullptr;
 
 	return nullptr;
 }

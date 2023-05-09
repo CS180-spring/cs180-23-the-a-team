@@ -13,6 +13,7 @@ struct Node
 	Node* next;
 	Node* prev;
 	int sortkey;
+	int id;
 };
 
 class LinkedList
@@ -34,7 +35,7 @@ public:
 	// there is no element i 
 	std::vector<std::pair<std::string, std::string>> get(int i) const;
 	// sorts the linked list in ascending order
-	LinkedList* sort(std::string column_name, int option);
+	LinkedList* sortList(std::string column_name, int option);
 	// Returns the number of items in the Linked List.       
 	int size() const;
 
