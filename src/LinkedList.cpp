@@ -22,10 +22,13 @@ void LinkedList::insertToRear(vector<pair<string, string>> data)
 	{
 		head = n;
 		tail = n;
+		head->next = tail;
+		tail->prev = head;
 	}
 	else
 	{
 		tail->next = n;
+		n->prev = tail;
 		tail = n;
 	}
 }
@@ -89,3 +92,49 @@ int LinkedList::size() const
 
 	return count;
 }
+
+// option key
+// 1 = ascending sort
+// 2 = descending sort
+LinkedList* LinkedList::sort(string column_name, int option)
+{
+	if (head == nullptr) return nullptr;
+
+	LinkedList* nList = new LinkedList();
+	Node * temp = head;
+
+	if (option == 1)
+	{
+		// first find index of column name
+		for (int i = 0; i < temp->data.size(); i++)
+		{
+			cout << "t" << endl;
+		}
+		while (temp != nullptr)
+		{
+				
+		}
+	}
+	else if (option == 2)
+	{
+
+	}
+	else return nullptr;
+	return nullptr;
+}
+
+/*
+void LinkedList::reverseList()
+{
+	Node* temp = head, * prevholder = nullptr, * nextholder = nullptr;
+	while (temp != nullptr)
+	{
+		nextholder = temp->next;
+		temp->next = prevholder;
+		prevholder = temp;
+		temp = nextholder;
+	}
+	head = prevholder;
+
+}
+*/

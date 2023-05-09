@@ -32,7 +32,8 @@ public:
 	// LinkedList and return true, returns false if        
 	// there is no element i 
 	std::vector<std::pair<std::string, std::string>> get(int i) const;
-	// Reverses the LinkedList       
+	// sorts the linked list in ascending order
+	LinkedList* sort(std::string column_name, int option);
 	// Returns the number of items in the Linked List.       
 	int size() const;
 
