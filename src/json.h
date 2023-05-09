@@ -64,7 +64,7 @@ class Json : public Collection
         }
         void stringparser(string command);
         string deleteChars(string &command, char t);
-{
+
     private:
         fstream file;
         LinkedList* jsondata = new LinkedList();
