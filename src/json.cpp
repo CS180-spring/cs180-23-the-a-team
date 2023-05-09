@@ -265,7 +265,7 @@ void Json::parseJson()
     */
 }
 
-LinkedList* searchFunc(LinkedList* &jsondata, string searchby, string match)
+LinkedList* searchFunc(LinkedList* &jsondata, string searchby, vector<string> match)
 {
     LinkedList* result;
     vector<pair<string, string>> v = jsondata->get(0);
@@ -275,10 +275,14 @@ LinkedList* searchFunc(LinkedList* &jsondata, string searchby, string match)
         if(searchby == v[i].first)
         {
             findattributeindex = i;
-            if( match == v[i].second)
+            for(int j = 0; j < match.size(); j++)
             {
-                result->insertToRear(jsondata->get(0));
+                if( match[j] == v[findattributeindex].second)
+                {
+                    result->insertToRear(jsondata->get(0));
+                }
             }
+            
             break;
         }
     }
@@ -287,9 +291,12 @@ LinkedList* searchFunc(LinkedList* &jsondata, string searchby, string match)
     for(int i = 1; i < jsondata->size(); i++)
     {
         v = jsondata->get(i);
-        if(match == v[findattributeindex].second)
+        for(int j = 0; j < match.size(); j++)
         {
-            result->insertToRear(jsondata->get(i));
+            if( match[j] == v[findattributeindex].second)
+            {
+                result->insertToRear(jsondata->get(0));
+            }
         }
         v.clear();
     }

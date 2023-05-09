@@ -62,7 +62,7 @@ class Json : public Collection
             std::vector<std::pair<std::string, std::string>> empty;
             //jsondata.insertToRear(empty);
         }
-        LinkedList* searchFunc(LinkedList* &jsondata, int searchby, string match);
+        LinkedList* searchFunc(LinkedList* &jsondata, int searchby, vector<string> match);
 
     private:
         fstream file;
