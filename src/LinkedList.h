@@ -12,6 +12,7 @@ struct Node
 	std::string stringforsort;
 	Node* next;
 	Node* prev;
+	int sortkey;
 };
 
 class LinkedList

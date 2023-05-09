@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include <iostream>
+#include <ctype.h>
 using namespace std;
 
 LinkedList::~LinkedList()
@@ -98,27 +99,59 @@ int LinkedList::size() const
 // 2 = descending sort
 LinkedList* LinkedList::sort(string column_name, int option)
 {
-	if (head == nullptr) return nullptr;
+	if (head == nullptr) 
+	{
+		return nullptr;
+	}
 
 	LinkedList* nList = new LinkedList();
 	Node * temp = head;
 
+
+	// first find index of column name
+	int index = -1;
+	for (int i = 0; i < temp->data.size(); i++)
+	{
+		if (temp->data[i].first == column_name)
+		{
+			index = i;
+		}
+	}
+	if (index == -1)
+	{
+		// could not find column name, return nullptr
+		return nullptr;
+	}
+	// integer validation 
+	for (int k = 0; k < temp->data[index].second.size(); k++)
+	{
+		if (isdigit(temp->data[index].second[k]))
+			continue;
+		else
+			return nullptr;
+	}
+
+	// can now safely convert to integer and store in storekey member of node
+	// go through whole linkedlist
+	temp = head;
+	
+	while (temp != nullptr)
+	{
+		temp->sortkey = stoi(temp->data[index].second);
+		temp = temp->next;
+	}
+
+	// set temp back to head
+	temp = head;
 	if (option == 1)
 	{
-		// first find index of column name
-		for (int i = 0; i < temp->data.size(); i++)
-		{
-			cout << "t" << endl;
-		}
-		while (temp != nullptr)
-		{
-				
-		}
+
 	}
 	else if (option == 2)
 	{
 
 	}
 	else return nullptr;
+
 	return nullptr;
 }
