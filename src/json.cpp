@@ -270,6 +270,7 @@ void stringparser(string command)
     deleteChars(command, ' ');
 
     //Grab first keyword that will be until next space
+    vector<string> values;    
     int index = command.find(' ');
     string temp= command.substr(0,index);
     string attrib, value;
@@ -288,11 +289,21 @@ void stringparser(string command)
     index = command.find('"');
     temp = command.substr(0,index);
     attrib = temp; 
-    command.erase(command.begin(), command.begin() + index+1);
+    command.erase(command.begin(), command.begin() + index);
     deleteChars(command, ' ');
-    deleteChars(command, '[');
-    index = command.find(']');
-    value = command.substr(0,index);
+    deleteChars(command, '(');
+    index = command.find(')');
+    value = command.substr(0,index-1);
+    while(value.find("|") != string::npos)
+    {
+        index = value.find('|');
+        temp = value.substr(0,index);
+        values.push_back(temp);
+    }
+    if(value.find("|") == string::npos)
+    {
+        values.push_back(temp);
+    }
 
     switch(choice)
     {
