@@ -289,7 +289,7 @@ void stringparser(string command)
     index = command.find('"');
     temp = command.substr(0,index);
     attrib = temp; 
-    command.erase(command.begin(), command.begin() + index);
+    command.erase(command.begin(), command.begin() + index + 1);
     deleteChars(command, ' ');
     deleteChars(command, '(');
     index = command.find(')');
