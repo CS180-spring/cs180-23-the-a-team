@@ -156,6 +156,7 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 
 	// set temp back to head
 	temp = head;
+
 	if (option == 1)
 	{
 		vector<pair<int, int>> sortvec;
@@ -175,16 +176,44 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 			nList->insertToRear(this->get(sortvec[i].second));
 		}
 
-		newH = nList->head;
-		for (int k = 0; k < nList.size(); k++)
+		Node* newH = nList->head;
+
+		while (newH != nullptr)
 		{
-			cout << nList->sortkey << endl;
+			cout << newH->data[0].second << endl;
+			newH = newH->next;
 		}
 
 		return nList;
 	}
 	else if (option == 2)
 	{
+		vector<pair<int, int>> sortvec;
+		while (temp != nullptr)
+		{
+			int id = temp->id;
+			int sortkey = temp->sortkey;
+    		pair t = make_pair(sortkey,id);
+			sortvec.push_back(t);
+			temp = temp->next;
+		}
+
+		sort(sortvec.begin(), sortvec.end());
+
+		for (int i = sortvec.size() - 1; i >= 0; i--)
+		{
+			nList->insertToRear(this->get(sortvec[i].second));
+		}
+
+		Node* newH = nList->head;
+
+		while (newH != nullptr)
+		{
+			cout << newH->data[0].second << endl;
+			newH = newH->next;
+		}
+
+		return nList;
 		return nList;
 	}
 
