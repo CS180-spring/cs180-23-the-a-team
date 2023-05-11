@@ -1,0 +1,23 @@
+{
+	"people": [{
+		"id": "9873e87e879ueid",
+		"name": "Farnaz",
+		"age": 23,
+		"college": "UC Riverside"
+	}, {
+		"id": "98e89r8983009id",
+		"name": "Golnaz",
+		"age": 27,
+		"college": "UC Berkely"
+	}, {
+		"id": "9898378747382id",
+		"name": "Niloofar",
+		"age": 30,
+		"college": "UCLA"
+	}, {
+		"id": "959067fs9d798id",
+		"name": "Muneeb",
+		"age": 23,
+		"college": "UC Riverside"
+	}]
+}
