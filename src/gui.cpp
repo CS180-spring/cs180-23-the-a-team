@@ -208,37 +208,36 @@ void gui::menu(bool &user)
         c.printcsv(name, sizeofdata, outputofcsv);
         outputofcsv.str();
         break;
-    case 9:
-        j.writeJson();
-        break;
-    case 10:
-        cout << "Please enter in a collection name(no spaces): ";
-        cin >> temp;
-        col.AddCollection(temp);
-        break;
-    case 11:
-        cout << "Collections: " << endl;
-        col.ViewAllCollections();
-        cout << "Please enter in the collection name(no spaces): ";
-        cin >> temp;
-        col.DeleteCollection(temp);
-        break;
-    case 12:
-        cin.ignore(1024, '\n');
-        cin.clear();
-        j.importJson();
-        break;
-    case 13:
-        j.view();
-        break;
-    case 14:
-        cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
-        cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
-        getline(cin, command);
-        cin.ignore(1024,'\n');
-        cin.clear();
-        j.stringparser(command);
-        break;
+        case 9:
+                j.writeJson();
+            break;
+        case 10:
+            cout << "Please enter in a collection name(no spaces): ";
+            cin >> temp;
+            col.AddCollection(temp);
+            break;
+        case 11:
+            cout << "Collections: " << endl;
+            col.ViewAllCollections();
+            cout << "Please enter in the collection name(no spaces): ";
+            cin >> temp;
+            col.DeleteCollection(temp);
+            break;
+        case 12:
+                cin.ignore(1024, '\n');
+                cin.clear();
+                j.importJson();
+                break;
+        case 13:
+                j.viewOriginal();
+                break;
+        case 14:
+                cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
+                cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
+                getline(cin, command);
+                cin.ignore(1024,'\n');
+                cin.clear();
+                j.stringparser(command);
     case 15:
         
         j.sortCurrentList();
