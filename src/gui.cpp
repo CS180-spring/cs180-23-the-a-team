@@ -1,6 +1,7 @@
 #include "gui.h"
 #include "json.h"
 #include "authentication.h"
+#include "LinkedList.h"
 
 using namespace std;
 bool user = false;
@@ -232,15 +233,16 @@ void gui::menu(bool &user)
                 j.viewOriginal();
                 break;
         case 14:
+                cin.ignore(1024,'\n');
+                cin.clear();
                 cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
                 cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
                 getline(cin, command);
-                cin.ignore(1024,'\n');
-                cin.clear();
                 j.stringparser(command);
+                break;
     case 15:
         
-        j.sortCurrentList();
+       // j.sortCurrentList();
         break;
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;

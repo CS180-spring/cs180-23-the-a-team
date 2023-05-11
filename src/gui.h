@@ -8,6 +8,7 @@
 #include "json.h"
 #include <filesystem>
 #include "collection.h"
+#include "LinkedList.h"
 
 class gui
 {

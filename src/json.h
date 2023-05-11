@@ -64,7 +64,7 @@ class Json : public Collection
             //jsondata.insertToRear(empty);
         }
 
-        LinkedList* searchFunc(LinkedList* jsondata, string searchby, vector<string> match);
+        void searchFunc( string searchby, vector<string> match);
         void stringparser(string command);
         void deleteChars(string &command, char t);
 

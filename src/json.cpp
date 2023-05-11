@@ -290,7 +290,7 @@ void Json::parseJson()
     */
 }
 
-LinkedList* Json::searchFunc(LinkedList* jsondata, string searchby, vector<string> match)
+void Json::searchFunc( string searchby, vector<string> match)
 {
     LinkedList* result;
     vector<pair<string, string>> v = jsondata->get(0);
@@ -302,7 +302,7 @@ LinkedList* Json::searchFunc(LinkedList* jsondata, string searchby, vector<strin
             findattributeindex = i;
             for(int j = 0; j < match.size(); j++)
             {
-                if( match[j] == v[findattributeindex].second)
+                if( match[0] == v[findattributeindex].second)
                 {
                     result->insertToRear(jsondata->get(0));
                 }
@@ -311,26 +311,37 @@ LinkedList* Json::searchFunc(LinkedList* jsondata, string searchby, vector<strin
             break;
         }
     }
-
-    v.clear();
-    for(int i = 1; i < jsondata->size(); i++)
+    cout << "Found attrib:" << v[findattributeindex].first << endl;
+    cout << "Match:" << match[0] <<";" << endl;
+    cout << "Size: " << jsondata->size() << endl;
+    //v.clear();
+    for(int i = 0; i < jsondata->size(); i++)
     {
         v = jsondata->get(i);
-        for(int j = 0; j < match.size(); j++)
-        {
-            if( match[j] == v[findattributeindex].second)
+   
+       // for(int j = 0; j < match.size(); j++)
+        //{
+            if( match[0] == v[findattributeindex].second)
             {
-                result->insertToRear(jsondata->get(0));
+            
+                for (int i = 0; i < v.size(); i++)
+                {
+                    cout << v[i].first << " "<< v[i].second << endl;
+                }
+                //result->insertToRear(jsondata->get(i));
+            
             }
-        }
-        v.clear();
+       // }
+        
     }
 
-    return result;
+   //view(result);
+
 }
 
 void Json::stringparser(string command)
 {
+    cout << "command:" << command << endl;
     deleteChars(command, ' ');
 
     //Grab first keyword that will be until next space
@@ -345,17 +356,16 @@ void Json::stringparser(string command)
         command.erase(command.begin(), command.begin() + index); //delete keyword
         deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
-        index = command.find('"');
+        index = command.find('"');     
         temp = command.substr(0,index);
         attrib = temp; 
-        
+        cout << "Attrib:" << attrib << endl;
         command.erase(command.begin(), command.begin() + index + 1);
         deleteChars(command, ' ');
         deleteChars(command, '(');
         index = command.find(')');
         value = command.substr(0,index);
         command.erase(command.begin(), command.begin() + index + 1);
-        
         if((value.find('|') != string::npos) || (value.length() != 0))
         {
             index = value.find('|');
@@ -363,7 +373,7 @@ void Json::stringparser(string command)
             values.push_back(temp);
             value.erase(0,index+1);
         }
-        
+        cout << "Here1" << endl;
         if(value.find("|") == string::npos)
         {
             index = value.find(')');
@@ -371,12 +381,13 @@ void Json::stringparser(string command)
             values.push_back(temp);
             temp = "";
         }
+      
     }
     if(temp == "SORT") 
     {
         choice = 2;
         command.erase(command.begin(), command.begin() + index); //delete keyword
-        deleteChars(command, ' ');
+        //deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
         index = command.find('"');
         temp = command.substr(0,index);
@@ -396,15 +407,15 @@ void Json::stringparser(string command)
         }
     }
     
-    
    switch (choice)
    {
-        case 1: //searchFunc(jsondata, attrib, values);
-                view();
+        case 1: 
+                searchFunc(attrib, values);
+                cin.clear();
+                //view(result);
             break;
-        case 2: //jsondata = sortList(attrib, sortoption);
-                view();
-
+        case 2: jsondata = jsondata->sortList(attrib, sortoption);
+                view(jsondata);
             break;
         default:
             break;
@@ -418,22 +429,8 @@ void Json::deleteChars(string &command, char t)
     //Delete first spaces
     while(command[0] == t)
     {
-        command.erase(command.begin(), command.begin());
+        command.erase(command.begin());
     }
-}
-
-
-void Json::sortCurrentList()
-{
-    string col_n;
-    int opt;
-    cout << "Which column would you like to sort by? (must be integer column) ";
-    cin >> col_n;
-    cout << "Would you like to do:\n\t1. Ascending Sort\n\t2. Descending Sort\nEnter option: ";
-    cin >> opt;
-
-    LinkedList* sortList = jsondata->sortList(col_n, opt);
-    sortList->printList();
 }
 
 void Json::viewOriginal()
