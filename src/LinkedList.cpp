@@ -219,3 +219,23 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 
 	return nullptr;
 }
+
+void LinkedList::set(std::vector<std::pair<std::string, std::string>> v, int i)
+{
+	int k = 0;
+	Node* temp = head;
+	if( head != nullptr)
+	{
+		while (temp != nullptr)
+		{
+			if (i == k)
+			{
+				temp->data.clear();
+				temp->data = v;
+			}
+			k++;
+			temp = temp->next;
+		}
+	}
+	
+}

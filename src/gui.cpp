@@ -227,7 +227,7 @@ void gui::menu(bool &user)
                 j.importJson();
                 break;
         case 13:
-                j.view();
+                j.viewOriginal();
                 break;
         case 14:
                 cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;

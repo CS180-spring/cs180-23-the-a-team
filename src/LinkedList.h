@@ -40,5 +40,7 @@ public:
 	int size() const;
 	// Add Node to front
 	void insertToFront(std::vector<std::pair<std::string, std::string>> data){}; //Be able to insert in front
+
+	void set(std::vector<std::pair<std::string, std::string>> v, int i);
 };
 #endif
