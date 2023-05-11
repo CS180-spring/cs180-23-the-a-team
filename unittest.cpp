@@ -65,6 +65,22 @@ TEST(JsonTest, WriteJsonTest) {
   EXPECT_EQ(fileContents, expectedOutput);
 }
 
+/*TEST(JsonTest, InitializeEMPTYjsonTest) {
+  Json json;
+  std::string collectionName = "myCollection";
+  std::string jsonName = "myJson";
+  json.intiializeEMPTYjson(collectionName, jsonName);
+
+  // Check that the file is created
+  std::string directory = "Database/" + collectionName + jsonName;
+  std::ifstream inputFile(directory);
+  bool fileExists = inputFile.good();
+  inputFile.close();
+  EXPECT_TRUE(fileExists);
+}*/
+
+
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
