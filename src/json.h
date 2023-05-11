@@ -67,7 +67,11 @@ class Json : public Collection
         LinkedList* searchFunc(LinkedList* jsondata, string searchby, vector<string> match);
         void stringparser(string command);
         void deleteChars(string &command, char t);
+
+        void sortCurrentList();
+
         void viewOriginal();
+
 
     private:
         fstream file;

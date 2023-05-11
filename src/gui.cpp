@@ -153,6 +153,8 @@ void gui::menu(bool &user)
     cout << "|      13. JSON viewer                   |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      14. Search and Sort               |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      15. Sort                          |" << endl; 
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -197,14 +199,14 @@ void gui::menu(bool &user)
         user = false;
         break;
     case 8:
-    cout << "Enter the path to file: " << endl;
-    getline(cin , name);
-    cin.ignore(1024, '\n');
-    cin.clear();
-    cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
-    cin >> sizeofdata;
-    c.printcsv(name, sizeofdata, outputofcsv);
-    outputofcsv.str();
+        cout << "Enter the path to file: " << endl;
+        getline(cin , name);
+        cin.ignore(1024, '\n');
+        cin.clear();
+        cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+        cin >> sizeofdata;
+        c.printcsv(name, sizeofdata, outputofcsv);
+        outputofcsv.str();
         break;
         case 9:
                 j.writeJson();
@@ -236,8 +238,12 @@ void gui::menu(bool &user)
                 cin.ignore(1024,'\n');
                 cin.clear();
                 j.stringparser(command);
-        default:
-        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
+    case 15:
+        
+        j.sortCurrentList();
         break;
+    default:
+        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
+    break;
     }
 };

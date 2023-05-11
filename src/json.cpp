@@ -399,11 +399,12 @@ void Json::stringparser(string command)
     
    switch (choice)
    {
-        case 1: result = searchFunc(jsondata, attrib, values);
-                view(result);
+        case 1: //searchFunc(jsondata, attrib, values);
+                view();
             break;
-        case 2: jsondata = jsondata->sortList(attrib, sortoption);
-                view(jsondata);
+        case 2: //jsondata = sortList(attrib, sortoption);
+                view();
+
             break;
         default:
             break;
@@ -421,8 +422,23 @@ void Json::deleteChars(string &command, char t)
     }
 }
 
+
+void Json::sortCurrentList()
+{
+    string col_n;
+    int opt;
+    cout << "Which column would you like to sort by? (must be integer column) ";
+    cin >> col_n;
+    cout << "Would you like to do:\n\t1. Ascending Sort\n\t2. Descending Sort\nEnter option: ";
+    cin >> opt;
+
+    LinkedList* sortList = jsondata->sortList(col_n, opt);
+    sortList->printList();
+}
+
 void Json::viewOriginal()
 {
     view(jsondata);
 }
+
 
