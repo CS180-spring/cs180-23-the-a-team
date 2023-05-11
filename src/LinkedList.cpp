@@ -218,9 +218,9 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 	return nullptr;
 }
 
-void printList()
+void LinkedList::printList()
 {
-	Node* temp = head;
+	Node * temp = head;
 
 	while (temp != nullptr)
 	{

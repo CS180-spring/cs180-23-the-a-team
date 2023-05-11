@@ -374,10 +374,10 @@ void Json::stringparser(string command)
     
    switch (choice)
    {
-        case 1: searchFunc(jsondata, attrib, values);
+        case 1: //searchFunc(jsondata, attrib, values);
                 view();
             break;
-        case 2: jsondata = sortList(attrib, sortoption);
+        case 2: //jsondata = sortList(attrib, sortoption);
                 view();
             break;
         default:

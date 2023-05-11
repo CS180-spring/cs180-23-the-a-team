@@ -153,6 +153,8 @@ void gui::menu(bool &user)
     cout << "|      13. JSON viewer                   |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      14. Search and Sort               |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      15. Sort                          |" << endl; 
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -238,6 +240,7 @@ void gui::menu(bool &user)
         j.stringparser(command);
         break;
     case 15:
+        
         j.sortCurrentList();
         break;
     default:
