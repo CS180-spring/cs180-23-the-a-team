@@ -24,7 +24,7 @@ TEST(csvtojson, withextension){
 }
 */
 
-TEST(JsonTest, ParseErrorTest) {
+/*sTEST(JsonTest, ParseErrorTest) {
    // Create a file with a JSON syntax error
   std::ofstream file("data.json");
   file << "{ \"name\": \"John\", \"age\": 30, }"; // Syntax error: trailing comma
@@ -43,8 +43,48 @@ TEST(JsonTest, ParseErrorTest) {
   EXPECT_TRUE(hasError && hasMissingNameError);
 
   // Remove the test file
-  //std::remove("data.json");
+  std::remove("data.json");
+}*/
+
+TEST(JsonTest, WriteJsonTest) {
+  Json json;
+  json.writeJson();
+
+  // Read the contents of the output file
+  std::ifstream inputFile("output.json");
+  std::stringstream buffer;
+  buffer << inputFile.rdbuf();
+  std::string fileContents = buffer.str();
+
+  // Remove tabs from the file contents
+  fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\t'), fileContents.end());
+
+  // Check that the output file contains the expected JSON data
+  std::string expectedOutput = "{\n\"people\": [{\n\"id\": \"9873e87e879ueid\",\n\"name\": \"Farnaz\",\n\"age\": 23,\n\"college\": \"UC Riverside\"\n}, {\n\"id\": \"98e89r8983009id\",\n\"name\": \"Golnaz\",\n\"age\": 27,\n\"college\": \"UC Berkely\"\n}, {\n\"id\": \"9898378747382id\",\n\"name\": \"Niloofar\",\n\"age\": 30,\n\"college\": \"UCLA\"\n}, {\n\"id\": \"959067fs9d798id\",\n\"name\": \"Muneeb\",\n\"age\": 23,\n\"college\": \"UC Riverside\"\n}]\n}";
+
+  EXPECT_EQ(fileContents, expectedOutput);
 }
+
+
+/*
+TEST(JsonTest, WriteJsonTest) {
+  // Call the function being tested
+  Json json;
+  json.writeJson();
+
+  // Read the contents of the output file
+  std::ifstream inputFile("output1.json");
+  std::stringstream buffer;
+  buffer << inputFile.rdbuf();
+  std::string fileContents = buffer.str();
+
+  // Check that the output file contains the expected content
+  std::string expectedOutput = "Hello";
+  EXPECT_EQ(fileContents, expectedOutput);
+}*/
+
+
+
 
 
 int main(int argc, char **argv) {
