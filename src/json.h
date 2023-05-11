@@ -22,6 +22,7 @@ using namespace std;
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <algorithm> 
 #include "collection.h"
 #include <vector>
 #include "LinkedList.h"
@@ -63,7 +64,7 @@ class Json : public Collection
             //jsondata.insertToRear(empty);
         }
         void stringparser(string command);
-        string deleteChars(string &command, char t);
+        void deleteChars(string &command, char t);
 
     private:
         fstream file;

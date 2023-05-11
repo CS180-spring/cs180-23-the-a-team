@@ -265,7 +265,7 @@ void Json::parseJson()
     */
 }
 
-void stringparser(string command)
+void Json::stringparser(string command)
 {
     deleteChars(command, ' ');
 
@@ -274,47 +274,81 @@ void stringparser(string command)
     int index = command.find(' ');
     string temp= command.substr(0,index);
     string attrib, value;
-    int choice = 0;
+    int choice = 0, sortoption;
     if(temp == "SEARCH")
     {
         choice = 1;
+        command.erase(command.begin(), command.begin() + index); //delete keyword
+        deleteChars(command, ' ');
+        deleteChars(command, '"'); //Delete 1st quotattion symbol
+        index = command.find('"');
+        temp = command.substr(0,index);
+        attrib = temp; 
+        
+        command.erase(command.begin(), command.begin() + index + 1);
+        deleteChars(command, ' ');
+        deleteChars(command, '(');
+        index = command.find(')');
+        value = command.substr(0,index);
+        command.erase(command.begin(), command.begin() + index + 1);
+        
+        if((value.find('|') != string::npos) || (value.length() != 0))
+        {
+            index = value.find('|');
+            temp = value.substr(0,index);
+            values.push_back(temp);
+            value.erase(0,index+1);
+        }
+        
+        if(value.find("|") == string::npos)
+        {
+            index = value.find(')');
+            temp = value.substr(0 ,index);
+            values.push_back(temp);
+            temp = "";
+        }
     }
-    if(temp == "SORT") //not implementing yet
+    if(temp == "SORT") 
     {
         choice = 2;
+        command.erase(command.begin(), command.begin() + index); //delete keyword
+        deleteChars(command, ' ');
+        deleteChars(command, '"'); //Delete 1st quotattion symbol
+        index = command.find('"');
+        temp = command.substr(0,index);
+        attrib = temp;
+        command.erase(command.begin(), command.begin() + index + 1);
+        deleteChars(command, ' ');
+        index = command.find(' ');
+        temp = command.substr(0,index-1);
+        transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
+        if (temp == "ASCENDING")
+        {
+            sortoption = 1;
+        }
+        else if (temp == "DESCENDING")
+        {
+            sortoption = 2;
+        }
     }
-    command.erase(command.begin(), command.begin() + index); //delete keyword
-    deleteChars(command, ' ');
-    deleteChars(command, '"'); //Delete 1st quotattion symbol
-    index = command.find('"');
-    temp = command.substr(0,index);
-    attrib = temp; 
-    command.erase(command.begin(), command.begin() + index + 1);
-    deleteChars(command, ' ');
-    deleteChars(command, '(');
-    index = command.find(')');
-    value = command.substr(0,index-1);
-    while(value.find("|") != string::npos)
-    {
-        index = value.find('|');
-        temp = value.substr(0,index);
-        values.push_back(temp);
-    }
-    if(value.find("|") == string::npos)
-    {
-        values.push_back(temp);
-    }
-
-    switch(choice)
-    {
-        case 1: search(jsondata, attrib, value);
+    
+    
+   switch (choice)
+   {
+        case 1: searchFunc(jsondata, attrib, values);
+                view();
             break;
-        case 2: 
+        case 2: jsondata = sortList(attrib, sortoption);
+                view();
             break;
-    }
+        default:
+            break;
+   }
+    
 }
 
-string deleteChars(string &command, char t)
+
+void Json::deleteChars(string &command, char t)
 {
     //Delete first spaces
     while(command[0] == t)
