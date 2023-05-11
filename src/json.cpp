@@ -319,7 +319,7 @@ void Json::stringparser(string command)
         attrib = temp;
         command.erase(command.begin(), command.begin() + index + 1);
         deleteChars(command, ' ');
-        index = command.find(' ');
+        index = command.find(';');
         temp = command.substr(0,index-1);
         transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
         if (temp == "ASCENDING")

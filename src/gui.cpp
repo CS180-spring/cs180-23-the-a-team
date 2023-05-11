@@ -123,7 +123,7 @@ void gui::menu(bool &user)
     stringstream outputofcsv;
     //Parser p; moved it to json file
     Collection col;
-    string temp, temp2;
+    string temp, temp2, command;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
@@ -151,6 +151,8 @@ void gui::menu(bool &user)
     cout << "|      12. Import Json document          |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      13. JSON viewer                   |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      14. Search and Sort               |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -227,6 +229,13 @@ void gui::menu(bool &user)
         case 13:
                 j.view();
                 break;
+        case 14:
+                cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
+                cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
+                getline(cin, command);
+                cin.ignore(1024,'\n');
+                cin.clear();
+                j.stringparser(command);
         default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
         break;
