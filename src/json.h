@@ -52,8 +52,8 @@ class Json : public Collection
         void parseJson(); 
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
-        void view();
-        void edit(vector<pair<string, string>> data);
+        void view(LinkedList* list);
+        vector<pair<string, string>> edit(vector<pair<string, string>> &show);
         void delNode(int id)
         {
             //.deleteNode(id);
@@ -64,14 +64,15 @@ class Json : public Collection
             //jsondata.insertToRear(empty);
         }
 
-        LinkedList* searchFunc(LinkedList* &jsondata, int searchby, vector<string> match);
+        LinkedList* searchFunc(LinkedList* jsondata, string searchby, vector<string> match);
         void stringparser(string command);
         void deleteChars(string &command, char t);
-
+        void viewOriginal();
 
     private:
         fstream file;
         LinkedList* jsondata = new LinkedList();
+        LinkedList* result = new LinkedList();
         string directory;
 };
 
