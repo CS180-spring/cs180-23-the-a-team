@@ -24,7 +24,7 @@ TEST(csvtojson, withextension){
 }
 */
 
-/*sTEST(JsonTest, ParseErrorTest) {
+/*TEST(JsonTest, ParseErrorTest) {
    // Create a file with a JSON syntax error
   std::ofstream file("data.json");
   file << "{ \"name\": \"John\", \"age\": 30, }"; // Syntax error: trailing comma
