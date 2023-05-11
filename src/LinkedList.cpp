@@ -229,6 +229,7 @@ void LinkedList::printList()
 		{
 			cout << temp->data[i].first << " : " << temp->data[i].second << endl;
 		}
+		temp = temp->next;
 	}
 
 	return;

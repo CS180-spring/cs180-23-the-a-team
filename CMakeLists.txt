@@ -17,6 +17,12 @@ ADD_EXECUTABLE(test
  
 )
 
+ADD_EXECUTABLE(main2
+    main2.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp src/LinkedList src/LinkedList.cpp
+
+ 
+)
+
 #set(FriendlyCDB "${FriendlyCDB} -std=c++17")
 target_link_libraries(FriendlyCDB stdc++fs)
 TARGET_LINK_LIBRARIES(test gtest)
