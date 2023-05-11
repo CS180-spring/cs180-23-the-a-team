@@ -180,7 +180,7 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 
 		while (newH != nullptr)
 		{
-			cout << newH->data[0].second << endl;
+			//cout << newH->data[0].second << endl;
 			newH = newH->next;
 		}
 
@@ -209,13 +209,26 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 
 		while (newH != nullptr)
 		{
-			cout << newH->data[0].second << endl;
+			//cout << newH->data[0].second << endl;
 			newH = newH->next;
 		}
-
-		return nList;
 		return nList;
 	}
 
 	return nullptr;
+}
+
+void printList()
+{
+	Node* temp = head;
+
+	while (temp != nullptr)
+	{
+		for (int i = 0; i < temp->data.size(); i++)
+		{
+			cout << temp->data[i].first << " : " << temp->data[i].second << endl;
+		}
+	}
+
+	return;
 }

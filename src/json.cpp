@@ -396,3 +396,15 @@ void Json::deleteChars(string &command, char t)
     }
 }
 
+void Json::sortCurrentList()
+{
+    string col_n;
+    int opt;
+    cout << "Which column would you like to sort by? (must be integer column) ";
+    cin >> col_n;
+    cout << "Would you like to do:\n\t1. Ascending Sort\n\t2. Descending Sort\nEnter option: ";
+    cin >> opt;
+
+    LinkedList* sortList = jsondata->sortList(col_n, opt);
+    sortList->printList();
+}

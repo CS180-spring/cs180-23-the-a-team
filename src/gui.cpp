@@ -197,47 +197,51 @@ void gui::menu(bool &user)
         user = false;
         break;
     case 8:
-    cout << "Enter the path to file: " << endl;
-    getline(cin , name);
-    cin.ignore(1024, '\n');
-    cin.clear();
-    cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
-    cin >> sizeofdata;
-    c.printcsv(name, sizeofdata, outputofcsv);
-    outputofcsv.str();
+        cout << "Enter the path to file: " << endl;
+        getline(cin , name);
+        cin.ignore(1024, '\n');
+        cin.clear();
+        cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+        cin >> sizeofdata;
+        c.printcsv(name, sizeofdata, outputofcsv);
+        outputofcsv.str();
         break;
-        case 9:
-                j.writeJson();
-            break;
-        case 10:
-            cout << "Please enter in a collection name(no spaces): ";
-            cin >> temp;
-            col.AddCollection(temp);
-            break;
-        case 11:
-            cout << "Collections: " << endl;
-            col.ViewAllCollections();
-            cout << "Please enter in the collection name(no spaces): ";
-            cin >> temp;
-            col.DeleteCollection(temp);
-            break;
-        case 12:
-                cin.ignore(1024, '\n');
-                cin.clear();
-                j.importJson();
-                break;
-        case 13:
-                j.view();
-                break;
-        case 14:
-                cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
-                cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
-                getline(cin, command);
-                cin.ignore(1024,'\n');
-                cin.clear();
-                j.stringparser(command);
-        default:
+    case 9:
+        j.writeJson();
+        break;
+    case 10:
+        cout << "Please enter in a collection name(no spaces): ";
+        cin >> temp;
+        col.AddCollection(temp);
+        break;
+    case 11:
+        cout << "Collections: " << endl;
+        col.ViewAllCollections();
+        cout << "Please enter in the collection name(no spaces): ";
+        cin >> temp;
+        col.DeleteCollection(temp);
+        break;
+    case 12:
+        cin.ignore(1024, '\n');
+        cin.clear();
+        j.importJson();
+        break;
+    case 13:
+        j.view();
+        break;
+    case 14:
+        cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
+        cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
+        getline(cin, command);
+        cin.ignore(1024,'\n');
+        cin.clear();
+        j.stringparser(command);
+        break;
+    case 15:
+        j.sortCurrentList();
+        break;
+    default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
-        break;
+    break;
     }
 };
