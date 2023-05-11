@@ -265,6 +265,45 @@ void Json::parseJson()
     */
 }
 
+LinkedList* searchFunc(LinkedList* &jsondata, string searchby, vector<string> match)
+{
+    LinkedList* result;
+    vector<pair<string, string>> v = jsondata->get(0);
+    int findattributeindex;
+    for(int i = 0; i < v.size(); i++)
+    {
+        if(searchby == v[i].first)
+        {
+            findattributeindex = i;
+            for(int j = 0; j < match.size(); j++)
+            {
+                if( match[j] == v[findattributeindex].second)
+                {
+                    result->insertToRear(jsondata->get(0));
+                }
+            }
+            
+            break;
+        }
+    }
+
+    v.clear();
+    for(int i = 1; i < jsondata->size(); i++)
+    {
+        v = jsondata->get(i);
+        for(int j = 0; j < match.size(); j++)
+        {
+            if( match[j] == v[findattributeindex].second)
+            {
+                result->insertToRear(jsondata->get(0));
+            }
+        }
+        v.clear();
+    }
+
+    return result;
+}
+
 void Json::stringparser(string command)
 {
     deleteChars(command, ' ');
@@ -356,3 +395,4 @@ void Json::deleteChars(string &command, char t)
         command.erase(command.begin(), command.begin());
     }
 }
+
