@@ -303,3 +303,96 @@ LinkedList* searchFunc(LinkedList* &jsondata, string searchby, vector<string> ma
 
     return result;
 }
+
+void Json::stringparser(string command)
+{
+    deleteChars(command, ' ');
+
+    //Grab first keyword that will be until next space
+    vector<string> values;    
+    int index = command.find(' ');
+    string temp= command.substr(0,index);
+    string attrib, value;
+    int choice = 0, sortoption;
+    if(temp == "SEARCH")
+    {
+        choice = 1;
+        command.erase(command.begin(), command.begin() + index); //delete keyword
+        deleteChars(command, ' ');
+        deleteChars(command, '"'); //Delete 1st quotattion symbol
+        index = command.find('"');
+        temp = command.substr(0,index);
+        attrib = temp; 
+        
+        command.erase(command.begin(), command.begin() + index + 1);
+        deleteChars(command, ' ');
+        deleteChars(command, '(');
+        index = command.find(')');
+        value = command.substr(0,index);
+        command.erase(command.begin(), command.begin() + index + 1);
+        
+        if((value.find('|') != string::npos) || (value.length() != 0))
+        {
+            index = value.find('|');
+            temp = value.substr(0,index);
+            values.push_back(temp);
+            value.erase(0,index+1);
+        }
+        
+        if(value.find("|") == string::npos)
+        {
+            index = value.find(')');
+            temp = value.substr(0 ,index);
+            values.push_back(temp);
+            temp = "";
+        }
+    }
+    if(temp == "SORT") 
+    {
+        choice = 2;
+        command.erase(command.begin(), command.begin() + index); //delete keyword
+        deleteChars(command, ' ');
+        deleteChars(command, '"'); //Delete 1st quotattion symbol
+        index = command.find('"');
+        temp = command.substr(0,index);
+        attrib = temp;
+        command.erase(command.begin(), command.begin() + index + 1);
+        deleteChars(command, ' ');
+        index = command.find(';');
+        temp = command.substr(0,index-1);
+        transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
+        if (temp == "ASCENDING")
+        {
+            sortoption = 1;
+        }
+        else if (temp == "DESCENDING")
+        {
+            sortoption = 2;
+        }
+    }
+    
+    
+   switch (choice)
+   {
+        case 1: searchFunc(jsondata, attrib, values);
+                view();
+            break;
+        case 2: jsondata = sortList(attrib, sortoption);
+                view();
+            break;
+        default:
+            break;
+   }
+    
+}
+
+
+void Json::deleteChars(string &command, char t)
+{
+    //Delete first spaces
+    while(command[0] == t)
+    {
+        command.erase(command.begin(), command.begin());
+    }
+}
+

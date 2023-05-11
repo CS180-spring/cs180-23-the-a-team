@@ -6,6 +6,7 @@ set(CMAKE_EXE_LINKER_FLAGS_INIT "-lstdc++fs")
 ADD_SUBDIRECTORY(googletest)
 #ADD_SUBDIRECTORY(rapidjson)
 
+
 ADD_EXECUTABLE(FriendlyCDB
     main.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp src/LinkedList src/LinkedList.cpp
 )
@@ -13,7 +14,7 @@ ADD_EXECUTABLE(FriendlyCDB
 ADD_EXECUTABLE(test
     unittest.cpp src/gui.cpp src/collection.cpp src/json.cpp src/csv.cpp src/authentication.cpp src/csvtojson.cpp src/parser.cpp src/LinkedList src/LinkedList.cpp
 
-   
+ 
 )
 
 #set(FriendlyCDB "${FriendlyCDB} -std=c++17")

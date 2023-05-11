@@ -22,6 +22,7 @@ using namespace std;
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <algorithm> 
 #include "collection.h"
 #include <vector>
 #include "LinkedList.h"
@@ -62,7 +63,11 @@ class Json : public Collection
             std::vector<std::pair<std::string, std::string>> empty;
             //jsondata.insertToRear(empty);
         }
+
         LinkedList* searchFunc(LinkedList* &jsondata, int searchby, vector<string> match);
+        void stringparser(string command);
+        void deleteChars(string &command, char t);
+
 
     private:
         fstream file;

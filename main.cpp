@@ -6,6 +6,7 @@
 #include <sstream>
 #include "src/gui.h"
 #include "src/collection.h"
+#include "cryptopp/eccrypto.h"
 
 using namespace std;
 
