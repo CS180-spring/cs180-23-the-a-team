@@ -45,30 +45,50 @@ void Json::writeJson() {
         string name;
         int age;
         string college;
+        Person* next;
     };
 
-    vector<Person> people = {
-        {"9873e87e879ueid", "Farnaz", 23, "UC Riverside"},
-        {"98e89r8983009id", "Golnaz", 27, "UC Berkely"},
-        {"9898378747382id", "Niloofar", 30, "UCLA"},
-        {"959067fs9d798id", "Muneeb", 23, "UC Riverside"}
-    };
+    Person* head = nullptr;
+
+    // Insert people into the linked list
+    Person* person1 = new Person{"9873e87e879ueid", "Farnaz", 23, "UC Riverside", nullptr};
+    Person* person2 = new Person{"98e89r8983009id", "Golnaz", 27, "UC Berkeley", nullptr};
+    Person* person3 = new Person{"9898378747382id", "Niloofar", 30, "UCLA", nullptr};
+    Person* person4 = new Person{"959067fs9d798id", "Muneeb", 23, "UC Riverside", nullptr};
+
+    head = person1;
+    person1->next = person2;
+    person2->next = person3;
+    person3->next = person4;
+
     string filename = "output.json";
-    
+
     ofstream outputFile(filename);
     if (outputFile.is_open()) {
         outputFile << "{\n\t\"people\": [";
-        for (size_t i = 0; i < people.size(); ++i) {
-            if (i != 0) {
+        Person* current = head;
+        while (current != nullptr) {
+            if (current != head) {
                 outputFile << ", ";
             }
-            outputFile << "{\n\t\t\"id\": \"" << people[i].id << "\",\n";
-            outputFile << "\t\t\"name\": \"" << people[i].name << "\",\n";
-            outputFile << "\t\t\"age\": " << people[i].age << ",\n";
-            outputFile << "\t\t\"college\": \"" << people[i].college << "\"\n\t}";
+            outputFile << "{\n\t\t\"id\": \"" << current->id << "\",\n";
+            outputFile << "\t\t\"name\": \"" << current->name << "\",\n";
+            outputFile << "\t\t\"age\": " << current->age << ",\n";
+            outputFile << "\t\t\"college\": \"" << current->college << "\"\n\t}";
+            current = current->next;
         }
         outputFile << "]\n}";
         outputFile.close();
+    } else {
+        cout << "Failed to open the file: " << filename << endl;
+    }
+
+    // Clean up the linked list
+    Person* current = head;
+    while (current != nullptr) {
+        Person* temp = current;
+        current = current->next;
+        delete temp;
     }
 }
 
