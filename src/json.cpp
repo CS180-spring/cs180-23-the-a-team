@@ -339,6 +339,54 @@ void Json::searchFunc( string searchby, vector<string> match)
 
 }
 
+void Json::filterFunc( string searchby, vector<string> match)
+{
+    LinkedList* result;
+    vector<pair<string, string>> v = jsondata->get(0);
+    int findattributeindex;
+    for(int i = 0; i < v.size(); i++)
+    {
+        if(searchby == v[i].first)
+        {
+            findattributeindex = i;
+            // for(int j = 0; j < match.size(); j++)
+            // {
+            //     if( match[0] == v[findattributeindex].second)
+            //     {
+            //         result->insertToRear(jsondata->get(0));
+            //     }
+            // }
+            
+            break;
+        }
+    }
+
+    v.clear();
+    for(int i = 0; i < jsondata->size(); i++)
+    {
+        v = jsondata->get(i);
+   
+       // for(int j = 0; j < match.size(); j++)
+        //{
+            if( match[0] != v[findattributeindex].second)
+            {
+            
+                for (int i = 0; i < v.size(); i++)
+                {
+                    cout << v[i].first << " " << v[i].second << endl;
+                }
+                //result->insertToRear(jsondata->get(i));
+            
+            }
+       // }
+        
+    }
+
+   //view(result);
+
+}
+
+
 void Json::stringparser(string command)
 {
     cout << "command:" << command << endl;
@@ -406,7 +454,38 @@ void Json::stringparser(string command)
             sortoption = 2;
         }
     }
-    
+    if(temp == "FILTER")
+    {
+        choice = 3;
+        command.erase(command.begin(), command.begin() + index); //delete keyword
+        deleteChars(command, ' ');
+        deleteChars(command, '"'); //Delete 1st quotattion symbol
+        index = command.find('"');     
+        temp = command.substr(0,index);
+        attrib = temp; 
+        cout << "Attrib:" << attrib << endl;
+        command.erase(command.begin(), command.begin() + index + 1);
+        deleteChars(command, ' ');
+        deleteChars(command, '(');
+        index = command.find(')');
+        value = command.substr(0,index);
+        command.erase(command.begin(), command.begin() + index + 1);
+        if((value.find('|') != string::npos) || (value.length() != 0))
+        {
+            index = value.find('|');
+            temp = value.substr(0,index);
+            values.push_back(temp);
+            value.erase(0,index+1);
+        }
+        if(value.find("|") == string::npos)
+        {
+            index = value.find(')');
+            temp = value.substr(0 ,index);
+            values.push_back(temp);
+            temp = "";
+        }
+      
+    }
    switch (choice)
    {
         case 1: 
@@ -417,6 +496,9 @@ void Json::stringparser(string command)
         case 2: jsondata = jsondata->sortList(attrib, sortoption);
                 view(jsondata);
             break;
+        case 3:
+                filterFunc(attrib, values);
+                cin.clear();
         default:
             break;
    }
@@ -437,5 +519,3 @@ void Json::viewOriginal()
 {
     view(jsondata);
 }
-
-
