@@ -71,6 +71,7 @@ class Json : public Collection
         void sortCurrentList();
 
         void viewOriginal();
+        void filterFunc( string searchby, vector<string> match);
 
 
     private:

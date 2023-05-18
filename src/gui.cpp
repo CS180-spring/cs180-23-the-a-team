@@ -153,9 +153,7 @@ void gui::menu(bool &user)
     cout << "|----------------------------------------|" << endl;
     cout << "|      13. JSON viewer                   |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      14. Search and Sort               |" << endl;
-    cout << "|----------------------------------------|" << endl;
-    cout << "|      15. Sort                          |" << endl; 
+    cout << "|      14. Search, Sort, Filter          |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -237,6 +235,7 @@ void gui::menu(bool &user)
                 cin.clear();
                 cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
                 cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
+                cout << "Sample Filter: FILTER \"This Col\" (value1|value2)" << endl;
                 getline(cin, command);
                 j.stringparser(command);
                 break;
