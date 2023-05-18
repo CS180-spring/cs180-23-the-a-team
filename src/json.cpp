@@ -408,7 +408,7 @@ void Json::stringparser(string command)
     {
         choice = 1;
         command.erase(command.begin(), command.begin() + index); //delete keyword
-        deleteChars(command, ' ');
+        //deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
         index = command.find('"');     
         temp = command.substr(0,index);
@@ -441,7 +441,7 @@ void Json::stringparser(string command)
     {
         choice = 2;
         command.erase(command.begin(), command.begin() + index); //delete keyword
-        //deleteChars(command, ' ');
+        deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
         index = command.find('"');
         temp = command.substr(0,index);
@@ -449,8 +449,9 @@ void Json::stringparser(string command)
         command.erase(command.begin(), command.begin() + index + 1);
         deleteChars(command, ' ');
         index = command.find(';');
-        temp = command.substr(0,index-1);
+        temp = command.substr(0,index);
         transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
+        cout << "Attrib: " << attrib << " temp: " << temp << endl;
         if (temp == "ASCENDING")
         {
             sortoption = 1;
