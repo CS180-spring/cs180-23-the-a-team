@@ -52,6 +52,7 @@ class Json : public Collection
         void parseJson(); 
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
+        void sortFunc(string attrib, int option);
         void view(LinkedList* list);
         vector<pair<string, string>> edit(vector<pair<string, string>> &show);
         void delNode(int id)

@@ -339,6 +339,12 @@ void Json::searchFunc( string searchby, vector<string> match)
 
 }
 
+void Json::sortFunc(string attrib, int option)
+{
+    LinkedList* result = jsondata->sortList(attrib, option);
+    result->printList();
+}
+
 void Json::filterFunc( string searchby, vector<string> match)
 {
     LinkedList* result;
@@ -493,8 +499,10 @@ void Json::stringparser(string command)
                 cin.clear();
                 //view(result);
             break;
-        case 2: jsondata = jsondata->sortList(attrib, sortoption);
-                view(jsondata);
+        case 2: //jsondata = jsondata->sortList(attrib, sortoption);
+                sortFunc(attrib, sortoption);
+
+                //view(jsondata);
             break;
         case 3:
                 filterFunc(attrib, values);
