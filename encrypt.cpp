@@ -91,7 +91,7 @@ char Security::decryptchar(char character){
         }
         //This is the Caesar Cypher algorithm/formula for decyrption
         //ch = ch + 'Z' - 'A' + 1;
-        character = (character + base  - keyShift + 26) % 26 + base;
+        character = (character - base  - keyShift + 26) % 26 + base;
     }
     return character;
 }
