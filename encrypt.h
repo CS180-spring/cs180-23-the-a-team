@@ -34,8 +34,8 @@ class Security
         bool openFile(const string& filename);
         string generateFileName();
         int getKeyShift();
-        string encrypt(const string& text); // this encrypys the entire string.
-        string decrypt(string cipherText, int keyShift);
+        string encrypt(string& text); // this encrypys the entire string.
+        string decrypt(string& cipherText);
         char encryptchar(char charactert); //this encrypts a single character using the Caesar cipher algorithm
         char decryptchar(char character); 
         //in order to decrypt a full string, we need to decrypt each ascii characters first. 
