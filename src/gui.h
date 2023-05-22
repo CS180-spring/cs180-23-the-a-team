@@ -20,6 +20,7 @@ class gui
          void login();
          void menu(bool& user);
          Json j;
+         Collection col;
         
 };
 
