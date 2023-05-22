@@ -61,9 +61,10 @@ int main() {
                 //inputFile.close();
                 {
                     
-                int decKey = SE.getKeyShift();
-                string decryptedmessage = SE.decrypt(encryptedmessage,decKey);
-                //cout << decryptedmessage << endl;
+                //int decKey = SE.getKeyShift();
+                cout << "encrypted message: " << encryptedmessage << endl;  
+                string decryptedmessage = SE.decrypt(encryptedmessage);
+                cout << "decrypted message: " << decryptedmessage << endl;
                 }
                 
                 //}else{
