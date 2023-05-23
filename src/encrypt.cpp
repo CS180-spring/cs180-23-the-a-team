@@ -33,7 +33,7 @@ char Security::encryptchar(char character){
     return character;
 }
 
-string Security::encrypt(const string& text)
+string Security::encrypt(string& text)
 {
     //here i want to read from a text file line by line and encrypt it.
     string encodedText;
@@ -76,7 +76,8 @@ string Security::generateFileName()
         tempFile += chars[dist(gen)];
     }
 
-    return "random_" + tempFile + ".txt"; //will do Json later as well
+    return "random_" + tempFile + ".json"; 
+    //return 'random_" + tempFile + ".txt"; //this can also be used if you want .txt extension
 }
 
 char Security::decryptchar(char character){
@@ -91,13 +92,13 @@ char Security::decryptchar(char character){
         }
         //This is the Caesar Cypher algorithm/formula for decyrption
         //ch = ch + 'Z' - 'A' + 1;
-        character = (character + base  - keyShift + 26) % 26 + base;
+        character = (character - base  - keyShift + 26) % 26 + base;
     }
     return character;
 }
 
 
-string Security::decrypt(string ciphertext, int Keyshift){
+string Security::decrypt(string& ciphertext){
 
     string decodedTxt;
     string decodedLine;
