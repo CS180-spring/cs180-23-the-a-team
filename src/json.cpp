@@ -269,18 +269,18 @@ void Json::parseJson()
         }
     
     string firstentry = information[0].first;
-    vector<pair< string, string>> result;
+    vector<pair< string, string>> temp;
     for(int i = 0; i < information.size(); i++)
     {
         if(information[i].first == firstentry && i != 0)
         {
-            jsondata->insertToRear(result);
-            result.clear();
+            jsondata->insertToRear(temp);
+            temp.clear();
         }
 
-        result.push_back(information[i]);
+        temp.push_back(information[i]);
     }
-    jsondata->insertToRear(result);
+    jsondata->insertToRear(temp);
     cout << "Size of LinkedList:" << jsondata->size() << endl;
     view(jsondata);
     /*
@@ -292,48 +292,38 @@ void Json::parseJson()
 
 void Json::searchFunc( string searchby, vector<string> match)
 {
-    LinkedList* result;
     vector<pair<string, string>> v = jsondata->get(0);
     int findattributeindex;
+    cout << "Finding " << searchby << " with " << match.size() << " matchings" << endl;
     for(int i = 0; i < v.size(); i++)
     {
         if(searchby == v[i].first)
         {
             findattributeindex = i;
-            for(int j = 0; j < match.size(); j++)
-            {
-                if( match[0] == v[findattributeindex].second)
-                {
-                    result->insertToRear(jsondata->get(0));
-                }
-            }
-            
-            break;
+            cout << "Found Attribute" << endl;
         }
     }
-    cout << "Found attrib:" << v[findattributeindex].first << endl;
-    cout << "Match:" << match[0] <<";" << endl;
-    cout << "Size: " << jsondata->size() << endl;
-    //v.clear();
+    cout << endl << "Attribute index: " << findattributeindex << endl;
+    cout << "Match:" << match[0] << ";" << endl;
     for(int i = 0; i < jsondata->size(); i++)
     {
+        cout << "Herein loop" << endl;
         v = jsondata->get(i);
    
-       // for(int j = 0; j < match.size(); j++)
-        //{
-            if( match[0] == v[findattributeindex].second)
+        for(int j = 0; j < match.size(); j++)
+        {
+            if( match[j] == v[findattributeindex].second)
             {
-            
-                for (int i = 0; i < v.size(); i++)
-                {
-                    cout << v[i].first << " "<< v[i].second << endl;
-                }
-                //result->insertToRear(jsondata->get(i));
-            
+                cout << "found";
+                result->insertToRear(v);
+                //break;
             }
-       // }
+        
+        }
         
     }
+    cout << "Found " << result->size() << " entries" << endl;
+    result->printList();
 
    //view(result);
 
@@ -408,26 +398,24 @@ void Json::stringparser(string command)
     {
         choice = 1;
         command.erase(command.begin(), command.begin() + index); //delete keyword
-        //deleteChars(command, ' ');
+        deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
         index = command.find('"');     
         temp = command.substr(0,index);
         attrib = temp; 
-        cout << "Attrib:" << attrib << endl;
         command.erase(command.begin(), command.begin() + index + 1);
         deleteChars(command, ' ');
         deleteChars(command, '(');
         index = command.find(')');
         value = command.substr(0,index);
         command.erase(command.begin(), command.begin() + index + 1);
-        if((value.find('|') != string::npos) || (value.length() != 0))
+        while(value.find('|') != string::npos)
         {
             index = value.find('|');
             temp = value.substr(0,index);
             values.push_back(temp);
             value.erase(0,index+1);
         }
-        cout << "Here1" << endl;
         if(value.find("|") == string::npos)
         {
             index = value.find(')');
