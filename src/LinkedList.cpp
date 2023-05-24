@@ -16,17 +16,18 @@ LinkedList::~LinkedList()
 
 void LinkedList::insertToRear(vector<pair<string, string>> data)
 {
-	Node* n = new Node, * temp = head;
+	Node* n = new Node();
+	// * temp = head;
 	n->data = data;
 	n->next = nullptr;
 
 	if (head == nullptr)
 	{
 		head = n;
-		tail = n;
+		tail = head;
 		n->id = 0;
-		head->next = tail;
-		tail->prev = head;
+		head->next = nullptr;
+		//tail->prev = head;
 
 	}
 	else
@@ -101,6 +102,7 @@ int LinkedList::size() const
 	{
 		temp = temp->next;
 		count++;
+		
 	}
 
 	return count;

@@ -303,9 +303,11 @@ void Json::searchFunc( string searchby, vector<string> match)
             cout << "Found Attribute" << endl;
         }
     }
+    cout << endl << "Attribute index: " << findattributeindex << endl;
     cout << "Match:" << match[0] << ";" << endl;
     for(int i = 0; i < jsondata->size(); i++)
     {
+        cout << "Herein loop" << endl;
         v = jsondata->get(i);
    
         for(int j = 0; j < match.size(); j++)
