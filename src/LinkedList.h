@@ -27,7 +27,7 @@ public:
 	// Destroys all the dynamically allocated memory       
 	// in the list.       
 	~LinkedList();
-	bool deleteNode(int i) const;
+	bool deleteNode(int i);
 	// Inserts val at the rear of the list       
 	void insertToRear(std::vector<std::pair<std::string, std::string>> data);
 	// Sets item to the value at position i stin this       

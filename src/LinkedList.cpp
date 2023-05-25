@@ -39,21 +39,30 @@ void LinkedList::insertToRear(vector<pair<string, string>> data)
 	}
 }
 
-bool LinkedList::deleteNode(int i) const
+bool LinkedList::deleteNode(int i)
 {
 	Node* temp = head;
 
 	if (head == nullptr)
 		return false;
-
+	
 	int k = 0;
 
 	while (temp != nullptr)
 	{
+			
 		if (i == k)
 		{
-			temp->prev->next = temp->next;
-			temp->next->prev = temp->prev;
+			if (k == 0)
+			{
+				temp->next->prev = nullptr;
+				head = temp->next;
+			}
+			else
+			{
+				temp->prev->next = temp->next;
+				temp->next->prev = temp->prev;
+			}
 			
 			// need to update ids
 			while (temp != nullptr)
