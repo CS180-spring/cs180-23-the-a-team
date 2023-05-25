@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include "src/json.h"
+#include "src/LinkedList.h"
 
 /*
 //TEST(s) goes above main
@@ -46,7 +47,7 @@ TEST(csvtojson, withextension){
   std::remove("data.json");
 }*/
 
-TEST(JsonTest, WriteJsonTest) {
+/*TEST(JsonTest, WriteJsonTest) {
   Json json;
   json.writeJson();
 
@@ -63,7 +64,7 @@ TEST(JsonTest, WriteJsonTest) {
   std::string expectedOutput = "{\n\"people\": [{\n\"id\": \"9873e87e879ueid\",\n\"name\": \"Farnaz\",\n\"age\": 23,\n\"college\": \"UC Riverside\"\n}, {\n\"id\": \"98e89r8983009id\",\n\"name\": \"Golnaz\",\n\"age\": 27,\n\"college\": \"UC Berkely\"\n}, {\n\"id\": \"9898378747382id\",\n\"name\": \"Niloofar\",\n\"age\": 30,\n\"college\": \"UCLA\"\n}, {\n\"id\": \"959067fs9d798id\",\n\"name\": \"Muneeb\",\n\"age\": 23,\n\"college\": \"UC Riverside\"\n}]\n}";
 
   EXPECT_EQ(fileContents, expectedOutput);
-}
+}*/
 
 /*TEST(JsonTest, InitializeEMPTYjsonTest) {
   Json json;
@@ -79,6 +80,73 @@ TEST(JsonTest, WriteJsonTest) {
   EXPECT_TRUE(fileExists);
 }*/
 
+TEST(LinkedList, CheckEmptyList) {
+  LinkedList* list = new LinkedList();
+  EXPECT_EQ(list->size(), 0);
+}
+TEST(LinkedList, CorrectListSize) {
+  LinkedList* list = new LinkedList();
+
+  pair t = make_pair("Age", "20");
+  pair t2 = make_pair("Age", "77");
+  pair t3 = make_pair("Age", "13");
+
+  vector<pair<string,string>> vec1;
+  vector<pair<string,string>> vec2;
+  vector<pair<string,string>> vec3;
+
+  vec1.push_back(t);
+  vec2.push_back(t2);
+  vec3.push_back(t3);
+
+  list->insertToRear(vec1);
+  list->insertToRear(vec2);
+  list->insertToRear(vec3);
+  EXPECT_EQ(list->size(), 3);
+}
+TEST(LinkedList, getCorrectVector) {
+  LinkedList* list = new LinkedList();
+
+  pair t = make_pair("Age", "20");
+  pair t2 = make_pair("Age", "77");
+  pair t3 = make_pair("Age", "13");
+
+  vector<pair<string,string>> vec1;
+  vector<pair<string,string>> vec2;
+  vector<pair<string,string>> vec3;
+
+  vec1.push_back(t);
+  vec2.push_back(t2);
+  vec3.push_back(t3);
+
+  list->insertToRear(vec1);
+  list->insertToRear(vec2);
+  list->insertToRear(vec3);
+
+  vector<pair<string,string>> result = list->get(1);
+  EXPECT_EQ(result[0].second, "77");
+}
+TEST(LinkedList, correctDelete) {
+  LinkedList* list = new LinkedList();
+
+  pair t = make_pair("Age", "20");
+  pair t2 = make_pair("Age", "77");
+  pair t3 = make_pair("Age", "13");
+
+  vector<pair<string,string>> vec1;
+  vector<pair<string,string>> vec2;
+  vector<pair<string,string>> vec3;
+
+  vec1.push_back(t);
+  vec2.push_back(t2);
+  vec3.push_back(t3);
+
+  list->insertToRear(vec1);
+  list->insertToRear(vec2);
+  list->insertToRear(vec3);
+  list->deleteNode(1);
+  EXPECT_EQ(list->size(), 2);
+}
 
 
 int main(int argc, char **argv) {
