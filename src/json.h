@@ -69,7 +69,7 @@ class Json : public Collection
         void deleteChars(string &command, char t);
 
         void sortCurrentList();
-
+        void viewResult();
         void viewOriginal();
         void filterFunc( string searchby, vector<string> match);
 
