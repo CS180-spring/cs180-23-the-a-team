@@ -561,3 +561,8 @@ void Json::viewResult()
 {
     view(result);
 }
+
+LinkedList* Json::getResult()
+{
+    return result;
+}
