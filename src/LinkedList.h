@@ -13,6 +13,7 @@ struct Node
 	Node* next;
 	Node* prev;
 	int sortkey;
+	std::string sortkeyS;
 	int id;
 };
 
