@@ -147,6 +147,20 @@ TEST(LinkedList, correctDelete) {
   list->deleteNode(1);
   EXPECT_EQ(list->size(), 2);
 }
+// TEST(JSON, Filter)
+// {
+//   Json* n = new Json("Collection_1", "Data.json");
+//   n->filterFunc("Age", {"30"});
+
+//   EXPECT_EQ(n->getResult()->size(), 1);
+// }
+// TEST(JSON, Sort)
+// {
+//   Json* n = new Json("Collection_1", "Data.json");
+//   //n->sortFunc("Age", 1);
+
+//   //EXPECT_EQ(n->getResult()->get(0)[2].second, "23");
+// }
 
 
 int main(int argc, char **argv) {
