@@ -38,6 +38,8 @@ void Json::setDirectoryJson(string cname, string jname)
     //check if directory already exists
 }
 
+//Below is test function for hard coded data
+/*
 //try to use rapidjson
 void Json::writeJson() {
      struct Person {
@@ -71,7 +73,44 @@ void Json::writeJson() {
         outputFile.close();
     }
 }
+*/
 
+//new exportJson 
+void Json::writeJson() {
+    //vector<pair<string, string>> v = jsondata->get(0);
+    //string columns[v.size()];
+    ofstream outfile("out.json");
+    string start = "[\n";
+    outfile << start;
+    string data;
+    for (int k = 0; k < jsondata->size(); k++)
+    {
+        vector<pair<string, string>> temp = jsondata->get(k);
+        data = "{\n";
+        for (int j = 0; j < temp.size(); j++)
+        {
+            data += "\t\"" + temp[j].first + "\": \"" +  temp[j].second + "\"";
+            if (j != temp.size() - 1) 
+            {
+                data += ",\n";
+            }
+            else 
+            {
+                data += "\n";
+            }
+        }
+        // data += "  \"id\": \"" + id + "\",\n";
+        // data += "  \"Name\": \"" + name + "\",\n";
+        // data += "  \"Age\": " + to_string(age) + ",\n";
+        // data += "  \"College\": \"" + college + "\"\n";
+        if (k != jsondata->size() - 1) { data += "},\n"; }
+        else { data += "}\n"; }
+        outfile << data;
+    }
+    string end = "]\n";
+    outfile << end;
+    outfile.close();
+}
 void Json::intiializeEMPTYjson(string collectionname, string jsonname)
 {
     directory = "Database/" + collectionname + jsonname;
