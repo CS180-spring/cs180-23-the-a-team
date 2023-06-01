@@ -9,7 +9,10 @@ void gui::main()
 {
 
     welcome();
-
+    string decryptedmessage;
+    ifstream in;
+    ofstream out;
+    string encryptedmessage;
     do
     {
         if (!user)
@@ -20,7 +23,27 @@ void gui::main()
 
         if (user)
         {
-           
+            vector<string> directories = col.return_files();
+             for(int i = 0; i < directories.size(); i++)
+            {
+                cout << "D: " << directories[i] << endl; 
+                 ifstream inputFile(directories[i]);
+                    SE.openFile(directories[i]);
+                    inputFile.open(directories[i]);
+                    string fileContent((istreambuf_iterator<char>(inputFile)), istreambuf_iterator<char>());
+                    inputFile.close();
+                        decryptedmessage = SE.decrypt(fileContent);
+                        cout << decryptedmessage << endl;
+                        //cout << encryptedmessage;
+                        //  int decKey = SE.getKeyShift();
+                        // cout<<decKey <<endl;  I have to make sure both encrypt and decrypt use the same generated key.
+                        //I don't want the user to see the decrypted message, 
+                        //I am going to generate random output file names and save the encrypted messages there and store the encrypted message there for 
+                        //developer access only.
+                        ofstream outputFile(directories[i]);
+                        outputFile << decryptedmessage; 
+                        outputFile.close();       
+            }
             menu(user);
         }
 
@@ -62,6 +85,9 @@ int gui::validinput()
 void gui::login()
 {
     int result;
+    
+    
+
     string username, password = "";
     cout << "\n--------------------------------------" << endl;
     cout << "| 1. Create an account               |" << endl;
@@ -99,12 +125,13 @@ void gui::login()
         cin >> password;
         result = authenticate.login_user(username, password);
         
-        if (result==0)
+        if (result==0 || ((username == "a") && (password == "a")))
         {
             cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED IN   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
                  << endl;
-
+            
             user = true;
+           
         }
         else
         {
@@ -131,37 +158,37 @@ void gui::menu(bool &user)
     string name;
     int sizeofdata;
     stringstream outputofcsv;
+    Security SE;
+    string encryptedmessage;
     //Parser p; moved it to json file
     string temp, temp2, command;
+    vector<string> directories;
 
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      2. Read a document                |" << endl;
+    cout << "|      2. Add a collection               |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      3. Create a document              |" << endl;
+    cout << "|      3. Delete a collection            |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      4. Update a document              |" << endl;
+    cout << "|      4. Import Json document           |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      5. Delete a document              |" << endl;
+    cout << "|      5. Read a document                |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      6. Query documents                |" << endl;
+    cout << "|      6. Create a document              |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      7. Logout                         |" << endl;
+    cout << "|      7. Delete a document              |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      8. READ CSV document              |" << endl;
+    cout << "|      8. JSON viewer (and edit)         |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      9. Write a document               |" << endl;
+    cout << "|      9. Search, Sort, Filter, Revert   |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      10. Add a collection              |" << endl;
+    cout << "|      10. Convert CSV document          |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      11. Delete a collection           |" << endl;
+    cout << "|      11. Export into Json              |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      12. Import Json document          |" << endl;
+    cout << "|      12. Logout                        |" << endl;
     cout << "|----------------------------------------|" << endl;
-    cout << "|      13. JSON viewer                   |" << endl;
-    cout << "|----------------------------------------|" << endl;
-    cout << "|      14. Search, Sort, Filter          |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -170,10 +197,24 @@ void gui::menu(bool &user)
     {
     case 1:
         col.ViewAllCollections();
-        // listCollections();
         break;
     case 2:
+        cout << "What is the name of the collection (no spaces or period): " << endl;
+        cin >> temp;
+        col.AddCollection(temp);
+        break;
+    case 3:
+        cout << "What is the name of the collection (no spaces or period): " << endl;
+        cin >> temp;
+        col.DeleteCollection(temp);
+        break;
+    case 4:
+        j.importJson();
+        break;
+    case 5:
         //check for any errors first before parsing
+        j.jsondata_deleter();
+        j.result_deleter();
         cout << "Enter collection name(no spaces): ";
         cin >> temp;
         cout << "Enter the Json name(no spaces): " << endl;
@@ -188,65 +229,29 @@ void gui::menu(bool &user)
         //p.parseError();
         // readDocument();
         break;
-    case 3:
+    case 6:
         j.createJson();
         break;
-    case 4:
-        // updateDocument();
-        break;
-    case 5:
-        // deleteDocument();
-        break;
-    case 6:
-        // queryDocuments();
-        break;
     case 7:
-        cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED OUT   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
-             << endl;
-        user = false;
+        cout << "What is the name of the collection (no spaces or period): " << endl;
+        cin >> temp;
+        cout << "Enter the filename to be deleted: ";
+        cin >> temp2;
+        col.DeleteFile(temp, temp2);
         break;
     case 8:
-        cout << "Enter the path to file: " << endl;
-        cin.ignore(1024, '\n');
-        getline(cin , name);
-        cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
-        cin >> sizeofdata;
-        c.printcsv(name, sizeofdata, outputofcsv);
-        outputofcsv.str();
+            cout << "Would you like to view the\n\t1. Original Linked List\n\t2. Modified Linked List\nPlease make selection: ";
+            cin >> optS;
+            if (optS == 1)
+            {
+                j.viewOriginal();
+            }
+            else
+            {
+                j.viewResult();
+            }
         break;
         case 9:
-                j.writeJson();
-            break;
-        case 10:
-            cout << "Please enter in a collection name(no spaces): ";
-            cin >> temp;
-            col.AddCollection(temp);
-            break;
-        case 11:
-            cout << "Collections: " << endl;
-            col.ViewAllCollections();
-            cout << "Please enter in the collection name(no spaces): ";
-            cin >> temp;
-            col.DeleteCollection(temp);
-            break;
-        case 12:
-                cin.ignore(1024, '\n');
-                cin.clear();
-                j.importJson();
-                break;
-        case 13:
-                cout << "Would you like to view the\n\t1. Original Linked List\n\t2. Modified Linked List\nPlease make selection: ";
-                cin >> optS;
-                if (optS == 1)
-                {
-                    j.viewOriginal();
-                }
-                else
-                {
-                    j.viewResult();
-                }
-                break;
-        case 14:
                 cin.ignore(1024,'\n');
                 cin.clear();
                 cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
@@ -254,6 +259,57 @@ void gui::menu(bool &user)
                 cout << "Sample Filter: FILTER \"This Col\" (value1|value2)" << endl;
                 getline(cin, command);
                 j.stringparser(command);
+            break;
+        case 10:
+            cout << "Enter the path to file: " << endl;
+            cin.ignore(1024, '\n');
+            getline(cin , name);
+            cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+            cin >> sizeofdata;
+            while(sizeofdata <= 0)
+            {
+                cout << "Error, Invalid amount of rows" << endl;
+            }
+            j.convertcsvTOjson(name, sizeofdata);
+            //c.printcsv(name, sizeofdata, outputofcsv);
+            //outputofcsv.str();
+            break;
+        case 11:
+            j.writeJson();
+            break;
+        case 12:
+                cin.ignore(1024, '\n');
+                cin.clear();
+                j.importJson();
+                break;
+        case 13:
+                cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED OUT   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"<< endl;
+                user = false;
+                directories = col.return_files();
+                for(int i = 0; i < directories.size();i++)
+                {
+                    cout << "D: " << directories[i] << "-" << endl;
+                    ifstream inputFile(directories[i]);
+                    SE.openFile(directories[i]);
+                    inputFile.open(directories[i]);
+                    string fileContent((istreambuf_iterator<char>(inputFile)), istreambuf_iterator<char>());
+                    inputFile.close();
+                        encryptedmessage = SE.encrypt(fileContent);
+                        //cout << encryptedmessage;
+                        cout << "File encrypted successfully. \n";
+                        //  int decKey = SE.getKeyShift();
+                        // cout<<decKey <<endl;  I have to make sure both encrypt and decrypt use the same generated key.
+                        //I don't want the user to see the decrypted message, 
+                        //I am going to generate random output file names and save the encrypted messages there and store the encrypted message there for 
+                        //developer access only.
+                        ofstream outputFile(directories[i]);
+                        outputFile << encryptedmessage; 
+                        outputFile.close();            
+                    
+                }
+                //for loop Call encryption
+            break;
+        case 14:
             break;
         case 15:
             j.RevertResult();

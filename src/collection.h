@@ -30,8 +30,11 @@ class Collection
             string getColName();
             void AddCollection(string name);
             void DeleteCollection(string name);
+            void DeleteFile(string colname, string filename);
             void ViewCollection(string name);
             void ViewAllCollections();
+            vector<string> return_files();
+            vector<string> return_folders();
             bool checkIFFolder(string s);
             bool verifyCollectionExist(string name);
             bool verifyFileExist(string collection, string name);

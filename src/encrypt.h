@@ -11,7 +11,7 @@ using namespace std;
 class Security
 {
     private:
-        int keyShift; 
+        int keyShift = 4; 
     public:
         string cipherText;
         string tempFile;
@@ -23,10 +23,10 @@ class Security
             //since I don't want the user know how I am encrypting their
             //information, I can't ask them for key,so I have to use random
             //library and generate a random key everytime. 
-            random_device rd;
-            mt19937 gen(rd());
-            uniform_int_distribution<int> dist(0, 25);
-            keyShift = dist(gen);
+            //random_device rd;
+           // mt19937 gen(rd());
+            //uniform_int_distribution<int> dist(0, 25);
+           // keyShift = 4;
         } 
         Security(int keyShift){
             this->keyShift = keyShift;

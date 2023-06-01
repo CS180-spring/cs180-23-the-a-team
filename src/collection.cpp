@@ -26,10 +26,15 @@ using namespace std;
 
     void Collection::AddCollection(string name)
     {
-        string dname = "Database/" + name;
-        const char* d = dname.c_str();
-        fs::create_directories(d);
-
+        if(!verifyCollectionExist(name))
+        {
+            string dname = "Database/" + name;
+            const char* d = dname.c_str();
+            fs::create_directories(d);
+        }
+        else{
+            cout << "Collection exists" << endl;
+        }
     }
 
     void Collection::DeleteCollection(string name)
@@ -37,6 +42,21 @@ using namespace std;
         if(verifyCollectionExist(name) == true)
         {
             string dname = "Database/" + name;
+            uintmax_t deletefolder=  fs::remove_all(dname);
+            cout << "Deletion Successful" << endl;
+        }
+        else
+        {
+            cout << "Deletion Failed" << endl;
+        }
+        
+    }
+
+    void Collection::DeleteFile(string colname, string filename)
+    {
+        if(verifyFileExist(colname, filename))
+        {
+            string dname = "Database/" + colname + "/" + filename;
             uintmax_t deletefolder=  fs::remove_all(dname);
             cout << "Deletion Successful" << endl;
         }
@@ -95,6 +115,55 @@ using namespace std;
         closedir(directory);   
     }
 
+    vector<string> Collection::return_folders()
+    {
+        vector<string> collections;
+        DIR *directory;
+        struct dirent* dent;
+        directory=opendir("Database/"); 
+        do 
+        {
+            dent = readdir(directory);
+            if (dent && (dent->d_name[0] != '.') )
+            {
+                if(checkIFFolder(dent->d_name))
+                {
+                    collections.push_back(dent->d_name);
+                }
+            }
+        } while (dent);
+        closedir(directory);
+
+        return collections;
+    }
+
+    vector<string> Collection::return_files()  //called by encryption
+    {
+        vector<string> folders = return_folders();
+        vector<string> directories;
+        string temp;
+        DIR *directory;
+        struct dirent* dent;
+        for(int i = 0; i < folders.size(); i++)
+        {
+            temp = "Database/" + folders[i];
+            directory=opendir(temp.c_str()); 
+            do 
+            {
+                dent = readdir(directory);
+                if (dent && (dent->d_name[0] != '.') )
+                {
+                    if(!checkIFFolder(dent->d_name))
+                    {
+                        directories.push_back(temp+"/"+dent->d_name);
+                    }
+                }
+            } while (dent);
+            closedir(directory);
+        }
+        return directories;
+    }
+    
     bool Collection::checkIFFolder(string s)
     {
         for(int i = 0; i < s.length(); i++)

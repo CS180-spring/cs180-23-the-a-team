@@ -8,6 +8,7 @@
 #include <filesystem>
 #include "collection.h"
 #include "LinkedList.h"
+#include "encrypt.h"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ class gui
          void menu(bool& user);
          void reset(string username);
          Json j;
+         Security SE;
          Collection col;        
 };
 

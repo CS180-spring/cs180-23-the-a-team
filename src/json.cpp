@@ -174,7 +174,7 @@ void Json::createJson() {
     temp2 = jsonValidator(temp, temp2);
     
     directory = "Database/" + temp + "/" + temp2;
-    cout << directory;
+    cout << "Directory" << directory << endl;
     writeJson();
 }
 
@@ -656,6 +656,10 @@ void Json::stringparser(string command)
         }
       
     }
+    if (temp == "REVERT")
+    {
+        choice = 4;
+    }
    switch (choice)
    {
         case 1: 
@@ -671,6 +675,9 @@ void Json::stringparser(string command)
         case 3:
                 filterFunc(attrib, values);
                 cin.clear();
+                break;
+        case 4:
+                RevertResult();
         default:
             break;
    }
@@ -702,5 +709,103 @@ void Json::RevertResult()
     result = jsondata;
     viewResult();
 }
+
+void Json::convertcsvTOjson(string name, int datarows)
+{
+    string csvfile = name;
+    fstream file;
+    file.open(csvfile);
+
+    string columns, temp, comma = ",";
+    vector<string> columnlist;
+
+    getline(file, columns);
+
+    int positionOfcomma = 0;
+    while(columns.find(comma) != string::npos)
+    {
+        positionOfcomma = columns.find(comma);
+        columnlist.push_back(columns.substr(0,positionOfcomma));
+        columns.erase(0,positionOfcomma+1);
+
+    }
+    if (columns.length() != 0)
+    {
+        positionOfcomma = columns.find(comma);
+        columnlist.push_back(columns.substr(0,positionOfcomma));
+        columns.erase(0,positionOfcomma+1);
+    }
+    
+    vector<pair <string, string>> v;
+    pair<string, string> p;
+    int rows = 0;
+    while(file.is_open())
+    {
+        for(int i = 0; i < columnlist.size(); i++)
+        {
+            p.first = columnlist[i];
+            if(i == (columnlist.size() - 1))
+            {
+                getline(file,temp);
+                p.second = temp;
+            }
+            else if (i <= (columnlist.size() - 1))
+            {
+                getline(file,temp,','); 
+                p.second = temp;
+            }
+            if (rows == datarows)
+            {
+                file.close();
+                break;
+            }
+            else
+            {
+                v.push_back(p);
+            }
+            
+        }
+        if(rows != datarows)
+        {
+            jsondata->insertToRear(v);
+        }
+        v.clear();
+        rows++;
+
+    }  
+    string t,t2;
+    cout << jsondata->size() << " Entries loaded into Data Structure " << endl;
+    cout << "Exporting into Path" << endl;
+    cout << "Enter collection name: ";
+    cin >> t;
+    while(!verifyCollectionExist(t)){
+        cout << "Error: Collection does not exist" << endl;
+        cout << "Enter collection name: ";
+        cin >> t;
+    }
+    cout << "Enter file name: ";
+    cin >> t2;
+    t2 = jsonValidator(t, t2);
+    
+    directory = "Database/" + t + "/" + t2;
+    writeJson();
+}
+
+void Json::jsondata_deleter()
+{
+    while(jsondata->size() > 0)
+    {
+        jsondata->deleteNode(0);
+    }
+}
+
+void Json::result_deleter()
+{
+    while(result->size() > 0)
+    {
+        result->deleteNode(0);
+    }
+}
+    
 
 

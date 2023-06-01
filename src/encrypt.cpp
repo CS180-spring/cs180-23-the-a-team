@@ -52,7 +52,6 @@ string Security::encrypt(string& text)
         encodedText += encodedline + '\n';
         encodedline.clear();
     }
-
     return encodedText;
 
 }
@@ -104,7 +103,6 @@ string Security::decrypt(string& ciphertext){
     string decodedLine;
     istringstream iss(ciphertext);
     string line;
-
     while (getline(iss, line))
     {
         for (char character : line)

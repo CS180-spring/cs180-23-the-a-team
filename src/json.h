@@ -78,12 +78,16 @@ class Json : public Collection
         void filterFunc( string searchby, vector<string> match);
         LinkedList* getResult();
         void RevertResult();
-
+        void convertcsvTOjson(string name, int datarows);
+        void jsondata_deleter();
+        void result_deleter();
+    
+        
     private:
         fstream file;
+        string directory;
         LinkedList* jsondata = new LinkedList();
         LinkedList* result = new LinkedList();
-        string directory;
 };
 
 #endif
