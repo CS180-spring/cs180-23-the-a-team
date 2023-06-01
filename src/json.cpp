@@ -139,39 +139,14 @@ void Json::importJson()
 
 void Json::view(LinkedList* list)
 {
-    int choice, viewcount, editchoice;
-    int counter = 0;
+    int viewcount, choice, counter, editchoice, i, c;
     vector<pair<string, string>> show;
-    cout << "Enter how many entries would you like to view per page (greater than 0): " << endl;
-    cin >> viewcount;
-    while(viewcount <= 0)
-    {
-        cout << "Invalid, Please Try Again " << endl;
-        cout << "Enter how many entries would you like to view per page (greater than 0): " << endl;
-        cin >> viewcount;
-    }
-    cout << "Use number 1 to 3 to control viewer" << endl;
-    cout << "1. Edit" << endl;
-    cout << "2. Previous" << endl;
-    cout << "3. Next" << endl;
-    cout << "99. Exit Viewer" << endl;
     do
     {
-        //Show the Node
-        for (int c = counter; c < viewcount; c++)
-        {
-            if(list->size() > c)
-            {
-                show = list->get(c);
-                cout<< c << ". ";
-                for(int i = 0; i < show.size() ; i++)
-                {
-                    cout << "'" << show[i].first << "' : " << show[i].second << endl;
-                } 
-            }
-            
-        }
-        
+        cout << "Use number 1 to 3 to control viewer" << endl;
+        cout << "1. Edit" << endl;
+        cout << "2. View List" << endl;
+        cout << "99. Exit Viewer" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -182,39 +157,82 @@ void Json::view(LinkedList* list)
                 list->set(show, editchoice);
                 break;
             case 2:
-                counter -= viewcount;
-                if(counter < 1)
+                if (list->size() < 101)
                 {
-                    counter = 0;
-                }
-                show.clear();
-                //go to previous node
-                break;
-            case 3:
-                if((counter += viewcount) >= list->size())
-                {
-                    counter += viewcount;
-                    show.clear();  
+                    int s = list->size();
+                    int count = 0, inc = 5;
+                    while (count != s)
+                    {
+                        if (s - count < inc)
+                        {
+                            inc = s - count;
+                        }
+                        for (int c = count; c < count + inc; c++)
+                        {
+                            if(list->size() > c)
+                            {
+                                show = list->get(c);
+                                cout<< c << ". ";
+                                for(int i = 0; i < show.size() ; i++)
+                                {
+                                    cout << "'" << show[i].first << "' : " << show[i].second << endl;
+                                } 
+                            }
+                            
+                        }
+                        int ch;
+                        cout << "\n\n1. Next Page" << endl;
+                        cout << "99. Exit Viewer" << endl; 
+                        cin >> ch;
+                        cout << endl;
+                        cout << endl;
+                        switch (ch)
+                        {
+                            case 1:
+                                count = count + inc;
+                                break;
+                            case 99:
+                                count = s;
+                                break;
+                            default:
+                                cout << "Invalid Option... Exiting" << endl;
+                                count = s;
+                                break;
+                        }
+                    }
+                    cout << "Exiting viewer" << endl;
                 }
                 else
                 {
-                    cout << "End of List" << endl;
+                    cout << "More than 100 entries, printing to file:\n\t jsonview.txt" << endl;
+                    ofstream outfile("jsonview.txt", std::ofstream::trunc);
+                    for (int c = 0; c < list->size(); c++)
+                    {
+                        if(list->size() > c)
+                        {
+                            show = list->get(c);
+                            outfile << c << ". ";
+                            for(int i = 0; i < show.size() ; i++)
+                            {
+                                outfile << "'" << show[i].first << "' : " << show[i].second << "\n";
+                            } 
+                        }
+                        
+                    }
                 }
-                
-                //go to next node
                 break;
             case 99:
                 break;
-            default:    cout << "Error: Invalid option" << endl;
-                        cout << "Use number 1 to 3 to control viewer" << endl;
-                        cout << "1. Edit" << endl;
-                        cout << "2. Previous" << endl;
-                        cout << "3. Next" << endl;
-                        cout << "99. Exit Viewer" << endl;
+            default:    
+                cout << "Error: Invalid option" << endl;
+                cout << "1. Edit" << endl;
+                cout << "2. View" << endl;
+                cout << "99. Exit Viewer" << endl;
                 break;
         }
         
     } while (choice != 99);
+
     
 }
 
