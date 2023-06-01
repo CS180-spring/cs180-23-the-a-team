@@ -180,7 +180,7 @@ void gui::menu(bool &user)
         // readDocument();
         break;
     case 3:
-        // createDocument();
+        j.createJson();
         break;
     case 4:
         // updateDocument();
