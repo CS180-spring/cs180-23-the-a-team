@@ -5,27 +5,7 @@ using namespace std;
 
     Collection::Collection()
     {
-        DIR *directory;
-        struct dirent* dent;
-        string d = "Database/";
-        const char* cname = d.c_str();
-        directory=opendir(cname); 
-        do 
-        {
-            dent = readdir(directory);
-            if (dent && (dent->d_name[0] != '.') )
-            {
-                if(checkIFFolder(dent->d_name))
-                {
-                    cout << "Collection: " << dent->d_name<< endl;
-                }
-                else
-                {
-                    cout << "File: " << dent->d_name << endl;
-                }
-            }
-        } while (dent);
-        closedir(directory);
+        
     }
 
     Collection::Collection(string name)
@@ -134,16 +114,13 @@ using namespace std;
         string n = "Database/";
         const char* d = n.c_str();
         directory=opendir(d);
-        cout << "137";
         do 
         {
             dent = readdir(directory);
             if (dent && (dent->d_name[0] != '.') )
             {
-                cout << "dent->d_name: " << dent->d_name << endl;
                 if(checkIFFolder(dent->d_name) && (dent->d_name == name))
                 {
-                    cout << "here146";
                     return true;
                 }
             }
@@ -151,6 +128,28 @@ using namespace std;
         closedir(directory);
         return false;
     }
+
+     bool Collection::verifyFileExist(string collection, string name)
+     {
+        DIR *directory;
+        struct dirent* dent;
+        string n = "Database/" + collection;
+        const char* d = n.c_str();
+        directory=opendir(d);
+        do 
+        {
+            dent = readdir(directory);
+            if (dent && (dent->d_name[0] != '.') )
+            {
+                if(dent->d_name == name)
+                {
+                    return true;
+                }
+            }
+        } while (dent);
+        closedir(directory);
+        return false;
+     }
 
 
 
