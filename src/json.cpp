@@ -264,12 +264,14 @@ string Json::jsonValidator(string col, string temp2){
 void Json::view(LinkedList* list)
 {
     int viewcount, choice, counter, editchoice, i, c;
+    int deletion = 0;
     vector<pair<string, string>> show;
     do
     {
         cout << "Use number 1 to 3 to control viewer" << endl;
         cout << "1. Edit" << endl;
         cout << "2. View List" << endl;
+        cout << "3. Delete Entry" << endl;
         cout << "99. Exit Viewer" << endl;
         cin >> choice;
         switch(choice)
@@ -296,7 +298,7 @@ void Json::view(LinkedList* list)
                             if(list->size() > c)
                             {
                                 show = list->get(c);
-                                cout<< c << ". ";
+                                cout<< c << "\n. ";
                                 for(int i = 0; i < show.size() ; i++)
                                 {
                                     cout << "'" << show[i].first << "' : " << show[i].second << endl;
@@ -344,6 +346,15 @@ void Json::view(LinkedList* list)
                         
                     }
                 }
+                break;
+            case 3:
+                    cout << "Enter the number asscociated to entry to be deleted" << endl;
+                    cin >> deletion;
+                    while(deletion < 0 || deletion >= list->size())
+                    {
+                        cout << "Error, Invalid index of deletion" << endl;
+                    }
+                    list->deleteNode(deletion);
                 break;
             case 99:
                 break;
@@ -497,7 +508,7 @@ void Json::searchFunc( string searchby, vector<string> match)
                //result->insertToRear(v);
                for(int k = 0; k < v.size(); k++)
                {
-                cout << v[i].first << ": " << v[i].second << endl;
+                cout << v[k].first << ": " << v[k].second << endl;
                }
             }
         }
