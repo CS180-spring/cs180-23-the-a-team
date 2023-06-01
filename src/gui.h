@@ -2,7 +2,15 @@
 #define GUI_H
 #include <string>
 #include <iostream>
+#include <fstream>
+#include "csvtojson.h"
+#include "json.h"
+#include <filesystem>
+#include "collection.h"
+#include "LinkedList.h"
+
 using namespace std;
+
 class gui
 {
     public:
@@ -15,7 +23,8 @@ class gui
          void login();
          void menu(bool& user);
          void reset(string username);
-        
+         Json j;
+         Collection col;        
 };
 
 #endif

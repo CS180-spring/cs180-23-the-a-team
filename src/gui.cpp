@@ -1,5 +1,7 @@
 #include "gui.h"
+#include "json.h"
 #include "authentication.h"
+#include "LinkedList.h"
 
 using namespace std;
 bool user = false;
@@ -18,7 +20,7 @@ void gui::main()
 
         if (user)
         {
-            welcome();
+           
             menu(user);
         }
 
@@ -124,6 +126,14 @@ void gui::login()
 };
 void gui::menu(bool &user)
 {
+    int optS = -1;
+    csvtojson c;
+    string name;
+    int sizeofdata;
+    stringstream outputofcsv;
+    //Parser p; moved it to json file
+    string temp, temp2, command;
+
     cout << "\n==========================================" << endl;
     cout << "|      1. List all collections           |" << endl;
     cout << "|----------------------------------------|" << endl;
@@ -138,6 +148,20 @@ void gui::menu(bool &user)
     cout << "|      6. Query documents                |" << endl;
     cout << "|----------------------------------------|" << endl;
     cout << "|      7. Logout                         |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      8. READ CSV document              |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      9. Write a document               |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      10. Add a collection              |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      11. Delete a collection           |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      12. Import Json document          |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      13. JSON viewer                   |" << endl;
+    cout << "|----------------------------------------|" << endl;
+    cout << "|      14. Search, Sort, Filter          |" << endl;
     cout << "==========================================" << endl;
     cout << "\nEnter your choice: ";
     int choice;
@@ -145,13 +169,27 @@ void gui::menu(bool &user)
     switch (choice)
     {
     case 1:
+        col.ViewAllCollections();
         // listCollections();
         break;
     case 2:
+        //check for any errors first before parsing
+        cout << "Enter collection name(no spaces): ";
+        cin >> temp;
+        cout << "Enter the Json name(no spaces): " << endl;
+        cin >> temp2;
+       // getline(cin , temp2);
+        //cin.ignore(1024, '\n');
+        //cin.clear();
+        j.setDirectoryJson(temp, temp2);
+        //j.parseError();
+        j.parseJson();
+        //p.parseJson();
+        //p.parseError();
         // readDocument();
         break;
     case 3:
-        // createDocument();
+        j.createJson();
         break;
     case 4:
         // updateDocument();
@@ -167,10 +205,60 @@ void gui::menu(bool &user)
              << endl;
         user = false;
         break;
-    default:
-        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
-             << endl;
+    case 8:
+        cout << "Enter the path to file: " << endl;
+        getline(cin , name);
+        cin.ignore(1024, '\n');
+        cin.clear();
+        cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
+        cin >> sizeofdata;
+        c.printcsv(name, sizeofdata, outputofcsv);
+        outputofcsv.str();
         break;
+        case 9:
+                j.writeJson();
+            break;
+        case 10:
+            cout << "Please enter in a collection name(no spaces): ";
+            cin >> temp;
+            col.AddCollection(temp);
+            break;
+        case 11:
+            cout << "Collections: " << endl;
+            col.ViewAllCollections();
+            cout << "Please enter in the collection name(no spaces): ";
+            cin >> temp;
+            col.DeleteCollection(temp);
+            break;
+        case 12:
+                cin.ignore(1024, '\n');
+                cin.clear();
+                j.importJson();
+                break;
+        case 13:
+                cout << "Would you like to view the\n\t1. Original Linked List\n\t2. Modified Linked List\nPlease make selection: ";
+                cin >> optS;
+                if (optS == 1)
+                {
+                    j.viewOriginal();
+                }
+                else
+                {
+                    j.viewResult();
+                }
+                break;
+        case 14:
+                cin.ignore(1024,'\n');
+                cin.clear();
+                cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
+                cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
+                cout << "Sample Filter: FILTER \"This Col\" (value1|value2)" << endl;
+                getline(cin, command);
+                j.stringparser(command);
+            break;
+    default:
+        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
+    break;
     }
 };
 

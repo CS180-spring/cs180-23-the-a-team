@@ -12,7 +12,7 @@ using namespace std;
 class csvtojson
 {
     public:
-        csvtojson();
+        csvtojson(){}
         void printcsv(string name, int datarows, ostream& output);
     private:
 

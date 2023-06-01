@@ -2,11 +2,11 @@
 
 using namespace std;
 
-csvtojson::csvtojson(){}
 
 void csvtojson::printcsv(string name, int datarows, ostream& output)
 {
     //Check name if it has .csv
+    /*
     string csvfile;
     string extension = ".csv";
     if (name.find(extension) == string::npos)
@@ -17,7 +17,8 @@ void csvtojson::printcsv(string name, int datarows, ostream& output)
     {
         csvfile = "Inputs/" + name;
     }
-    
+    */
+    string csvfile = name;
     fstream file;
     //fstream jsonfile;
     file.open(csvfile);
@@ -26,7 +27,6 @@ void csvtojson::printcsv(string name, int datarows, ostream& output)
     string columns, temp, comma = ",";
     vector<string> columnlist;
 
-    cout << "File name: " << csvfile << endl;
     getline(file, columns);
 
     int positionOfcomma = 0;
