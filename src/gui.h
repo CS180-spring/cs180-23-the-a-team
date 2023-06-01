@@ -1,6 +1,6 @@
 #ifndef GUI_H
 #define GUI_H
-
+#include <string>
 #include <iostream>
 #include <fstream>
 #include "csvtojson.h"
@@ -9,18 +9,22 @@
 #include "collection.h"
 #include "LinkedList.h"
 
+using namespace std;
+
 class gui
 {
     public:
           void main();
+          int validinput();
+          
     private:
-         int validinput();
+        
          void welcome();
          void login();
          void menu(bool& user);
+         void reset(string username);
          Json j;
-         Collection col;
-        
+         Collection col;        
 };
 
 #endif
