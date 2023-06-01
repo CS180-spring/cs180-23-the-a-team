@@ -455,7 +455,7 @@ void Json::parseJson()
 
 void Json::searchFunc( string searchby, vector<string> match)
 {
-    LinkedList* result;
+    result_deleter();
     vector<pair<string, string>> v = jsondata->get(0);
     int findattributeindex;
     for(int i = 0; i < v.size(); i++)
@@ -463,40 +463,31 @@ void Json::searchFunc( string searchby, vector<string> match)
         if(searchby == v[i].first)
         {
             findattributeindex = i;
-            for(int j = 0; j < match.size(); j++)
-            {
-                if( match[0] == v[findattributeindex].second)
-                {
-                    result->insertToRear(jsondata->get(0));
-                }
-            }
-            
             break;
         }
     }
     cout << "Found attrib:" << v[findattributeindex].first << endl;
     cout << "Match:" << match[0] <<";" << endl;
     cout << "Size: " << jsondata->size() << endl;
-    //v.clear();
+    //v.clear();/*
     for(int i = 0; i < jsondata->size(); i++)
     {
         v = jsondata->get(i);
    
-       // for(int j = 0; j < match.size(); j++)
-        //{
-            if( match[0] == v[findattributeindex].second)
+        for(int j = 0; j < match.size(); j++)
+        {
+            if( match[j] == v[findattributeindex].second)
             {
-            
-                for (int i = 0; i < v.size(); i++)
-                {
-                    cout << v[i].first << " "<< v[i].second << endl;
-                }
-                //result->insertToRear(jsondata->get(i));
-            
+               //result->insertToRear(v);
+               for(int k = 0; k < v.size(); k++)
+               {
+                cout << v[i].first << ": " << v[i].second << endl;
+               }
             }
-       // }
+        }
         
     }
+    
 
    //view(result);
 
@@ -571,7 +562,7 @@ void Json::stringparser(string command)
     {
         choice = 1;
         command.erase(command.begin(), command.begin() + index); //delete keyword
-        //deleteChars(command, ' ');
+        deleteChars(command, ' ');
         deleteChars(command, '"'); //Delete 1st quotattion symbol
         index = command.find('"');     
         temp = command.substr(0,index);

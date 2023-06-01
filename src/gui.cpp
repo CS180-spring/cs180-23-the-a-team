@@ -5,6 +5,7 @@
 
 using namespace std;
 bool user = false;
+int counter = 0;
 void gui::main()
 {
 
@@ -23,9 +24,11 @@ void gui::main()
 
         if (user)
         {
-            vector<string> directories = col.return_files();
-             for(int i = 0; i < directories.size(); i++)
+            if(counter == 0)
             {
+                 vector<string> directories = col.return_files();
+                 for(int i = 0; i < directories.size(); i++)
+                {
                 cout << "D: " << directories[i] << endl; 
                  ifstream inputFile(directories[i]);
                     SE.openFile(directories[i]);
@@ -43,8 +46,12 @@ void gui::main()
                         ofstream outputFile(directories[i]);
                         outputFile << decryptedmessage; 
                         outputFile.close();       
+                }
+                counter++;
             }
+           
             menu(user);
+            cout << "Here__________________" << endl;
         }
 
     } while (true);
@@ -158,7 +165,6 @@ void gui::menu(bool &user)
     string name;
     int sizeofdata;
     stringstream outputofcsv;
-    Security SE;
     string encryptedmessage;
     //Parser p; moved it to json file
     string temp, temp2, command;
@@ -217,8 +223,20 @@ void gui::menu(bool &user)
         j.result_deleter();
         cout << "Enter collection name(no spaces): ";
         cin >> temp;
+        while(!col.verifyCollectionExist(temp))
+        {
+            cout << "Error, unknown collection" << endl;
+            cout << "Enter collection name(no spaces): ";
+            cin >> temp;
+        }
         cout << "Enter the Json name(no spaces): " << endl;
         cin >> temp2;
+        while(!col.verifyFileExist(temp, temp2))
+        {
+            cout << "Error, unknown file of collection: " << temp << endl;
+            cout << "Enter the Json name(no spaces): " << endl;
+            cin >> temp2;
+        }
        // getline(cin , temp2);
         //cin.ignore(1024, '\n');
         //cin.clear();
@@ -253,11 +271,11 @@ void gui::menu(bool &user)
         break;
         case 9:
                 cin.ignore(1024,'\n');
-                cin.clear();
                 cout << "Sample Search:  SEARCH \"This Col\" (value1|value2)" << endl;
                 cout << "Sample Sort: SORT \"This Col\" ASCENDING;" << endl;
                 cout << "Sample Filter: FILTER \"This Col\" (value1|value2)" << endl;
                 getline(cin, command);
+                cin.clear();
                 j.stringparser(command);
             break;
         case 10:
