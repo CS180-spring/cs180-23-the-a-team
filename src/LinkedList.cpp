@@ -122,6 +122,7 @@ int LinkedList::size() const
 // 2 = descending sort
 LinkedList* LinkedList::sortList(string column_name, int option)
 {
+	bool strFlag = false;
 	if (head == nullptr) 
 	{
 		return nullptr;
@@ -151,79 +152,130 @@ LinkedList* LinkedList::sortList(string column_name, int option)
 		if (isdigit(temp->data[index].second[k]))
 			continue;
 		else
-			return nullptr;
+			strFlag = true;
+			break;
 	}
 
 	// can now safely convert to integer and store in storekey member of node
 	// go through whole linkedlist
 	temp = head;
-	
-	while (temp != nullptr)
+	if (!strFlag)
 	{
-		//cout << temp->id << endl;
-		temp->sortkey = stoi(temp->data[index].second);
-		temp = temp->next;
+		while (temp != nullptr)
+		{
+			//cout << temp->id << endl;
+			temp->sortkey = stoi(temp->data[index].second);
+			temp = temp->next;
+		}
 	}
+	else
+	{
+		while (temp != nullptr)
+		{
+			temp->sortkeyS = temp->data[index].second;
+			temp = temp->next;
+		}
+	}
+
 
 	// set temp back to head
 	temp = head;
 
+
+
 	if (option == 1)
 	{
-		vector<pair<int, int>> sortvec;
-		while (temp != nullptr)
+		if (strFlag)
 		{
-			int id = temp->id;
-			int sortkey = temp->sortkey;
-    		pair t = make_pair(sortkey,id);
-			sortvec.push_back(t);
-			temp = temp->next;
+			vector<pair<string, int>> sortvec;
+			while (temp != nullptr)
+			{
+				int id = temp->id;
+				auto sortkey = temp->sortkeyS;
+				pair t = make_pair(sortkey,id);
+				sortvec.push_back(t);
+				temp = temp->next;
+			}
+	
+			sort(sortvec.begin(), sortvec.end());
+
+			for (int i = 0; i < sortvec.size(); i++)
+			{
+				nList->insertToRear(this->get(sortvec[i].second));
+			}
+
+			return nList;
+
+		}
+		else
+		{
+			vector<pair<int,int>> sortvec;
+			while (temp != nullptr)
+			{
+				int id = temp->id;
+				auto sortkey = temp->sortkey;
+				pair t = make_pair(sortkey,id);
+				sortvec.push_back(t);
+				temp = temp->next;
+			}
+	
+			sort(sortvec.begin(), sortvec.end());
+
+			for (int i = 0; i < sortvec.size(); i++)
+			{
+				nList->insertToRear(this->get(sortvec[i].second));
+			}
+
+			return nList;
 		}
 
-		sort(sortvec.begin(), sortvec.end());
-
-		for (int i = 0; i < sortvec.size(); i++)
-		{
-			nList->insertToRear(this->get(sortvec[i].second));
-		}
-
-		Node* newH = nList->head;
-
-		while (newH != nullptr)
-		{
-			//cout << newH->data[0].second << endl;
-			newH = newH->next;
-		}
-
-		return nList;
 	}
 	else if (option == 2)
 	{
-		vector<pair<int, int>> sortvec;
-		while (temp != nullptr)
+		if (strFlag)
 		{
-			int id = temp->id;
-			int sortkey = temp->sortkey;
-    		pair t = make_pair(sortkey,id);
-			sortvec.push_back(t);
-			temp = temp->next;
+			vector<pair<string, int>> sortvec;
+			while (temp != nullptr)
+			{
+				int id = temp->id;
+				auto sortkey = temp->sortkeyS;
+				pair t = make_pair(sortkey,id);
+				sortvec.push_back(t);
+				temp = temp->next;
+			}
+
+			sort(sortvec.begin(), sortvec.end());
+
+			for (int i = sortvec.size() - 1; i >= 0; i--)
+			{
+				nList->insertToRear(this->get(sortvec[i].second));
+			}
+
+			return nList;
 		}
-
-		sort(sortvec.begin(), sortvec.end());
-
-		for (int i = sortvec.size() - 1; i >= 0; i--)
+		else
 		{
-			nList->insertToRear(this->get(sortvec[i].second));
-		}
+			vector<pair<int,int>> sortvec;
+			while (temp != nullptr)
+			{
+				int id = temp->id;
+				auto sortkey = temp->sortkey;
+				pair t = make_pair(sortkey,id);
+				sortvec.push_back(t);
+				temp = temp->next;
+			}
 
-		Node* newH = nList->head;
+			sort(sortvec.begin(), sortvec.end());
 
-		while (newH != nullptr)
-		{
-			//cout << newH->data[0].second << endl;
-			newH = newH->next;
+			for (int i = sortvec.size() - 1; i >= 0; i--)
+			{
+				nList->insertToRear(this->get(sortvec[i].second));
+			}
+
+			return nList;
 		}
-		return nList;
+	
+
 	}
 
 	return nullptr;

@@ -370,7 +370,8 @@ void Json::searchFunc( string searchby, vector<string> match)
 
 void Json::sortFunc(string attrib, int option)
 {
-    LinkedList* result = jsondata->sortList(attrib, option);
+    result = jsondata->sortList(attrib, option);
+    cout << "SORT DONE" << endl;
     result->printList();
 }
 
@@ -554,4 +555,9 @@ void Json::deleteChars(string &command, char t)
 void Json::viewOriginal()
 {
     view(jsondata);
+}
+
+void Json::viewResult()
+{
+    view(result);
 }

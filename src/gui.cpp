@@ -117,7 +117,7 @@ void gui::login()
 };
 void gui::menu(bool &user)
 {
-
+    int optS = -1;
     csvtojson c;
     string name;
     int sizeofdata;
@@ -227,7 +227,16 @@ void gui::menu(bool &user)
                 j.importJson();
                 break;
         case 13:
-                j.viewOriginal();
+                cout << "Would you like to view the\n\t1. Original Linked List\n\t2. Modified Linked List\nPlease make selection: ";
+                cin >> optS;
+                if (optS == 1)
+                {
+                    j.viewOriginal();
+                }
+                else
+                {
+                    j.viewResult();
+                }
                 break;
         case 14:
                 cin.ignore(1024,'\n');
@@ -237,11 +246,7 @@ void gui::menu(bool &user)
                 cout << "Sample Filter: FILTER \"This Col\" (value1|value2)" << endl;
                 getline(cin, command);
                 j.stringparser(command);
-                break;
-    case 15:
-        
-       // j.sortCurrentList();
-        break;
+            break;
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
     break;
