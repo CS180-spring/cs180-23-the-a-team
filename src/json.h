@@ -77,6 +77,7 @@ class Json : public Collection
         void viewOriginal();
         void filterFunc( string searchby, vector<string> match);
         LinkedList* getResult();
+        void RevertResult();
 
     private:
         fstream file;

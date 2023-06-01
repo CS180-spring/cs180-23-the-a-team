@@ -207,9 +207,8 @@ void gui::menu(bool &user)
         break;
     case 8:
         cout << "Enter the path to file: " << endl;
-        getline(cin , name);
         cin.ignore(1024, '\n');
-        cin.clear();
+        getline(cin , name);
         cout << "Enter the amount of rows you wish to import(excluding row1 with column names): ";
         cin >> sizeofdata;
         c.printcsv(name, sizeofdata, outputofcsv);
@@ -256,6 +255,8 @@ void gui::menu(bool &user)
                 getline(cin, command);
                 j.stringparser(command);
             break;
+        case 15:
+            j.RevertResult();
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
     break;

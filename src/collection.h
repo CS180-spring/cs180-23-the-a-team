@@ -34,6 +34,7 @@ class Collection
             void ViewAllCollections();
             bool checkIFFolder(string s);
             bool verifyCollectionExist(string name);
+            bool verifyFileExist(string collection, string name);
             void test()
             {
                 Node* n = new Node();

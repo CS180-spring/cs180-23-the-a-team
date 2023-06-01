@@ -694,6 +694,13 @@ void Json::viewOriginal()
 
 void Json::viewResult()
 {
-    view(result);
+    view(jsondata);
 }
+
+void Json::RevertResult()
+{
+    result = jsondata;
+    viewResult();
+}
+
 
