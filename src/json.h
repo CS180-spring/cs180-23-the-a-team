@@ -50,6 +50,9 @@ class Json : public Collection
         void createJson();
         void parseError();
         void parseJson(); 
+        bool intChecker(int value);
+        bool jsonChecker(string value);
+        string jsonValidator(string col, string temp2);
         void intiializeEMPTYjson(string collectionname, string jsonname);
         void importJson();
         void sortFunc(string attrib, int option);

@@ -124,8 +124,19 @@ void Json::createJson() {
 
     cout << "How many entries of data: ";
     cin >> entryCount;
+    while(!intChecker(entryCount)){
+        cout << "Error: Number has to be greater than 0" << endl;
+        cout << "How many entires of data: ";
+        cin >> entryCount;
+    }
     cout << "How many attributes per entry: ";
     cin >> attributeCount;
+    while(!intChecker(attributeCount)){
+        cout << "Error: Number has to be greater than 0" << endl;
+        cout << "How many entires of data: ";
+        cin >> attributeCount;
+    }
+
 
     cin.ignore(10000, '\n');
     cin.clear();
@@ -153,14 +164,45 @@ void Json::createJson() {
     }
     cout << "Enter collection name: ";
     cin >> temp;
+    while(!verifyCollectionExist(temp)){
+        cout << "Error: Collection does not exist" << endl;
+        cout << "Enter collection name: ";
+        cin >> temp;
+    }
     cout << "Enter file name: ";
     cin >> temp2;
+    temp2 = jsonValidator(temp, temp2);
     
-
     directory = "Database/" + temp + "/" + temp2;
     cout << directory;
     writeJson();
 }
+
+bool Json::intChecker(int value){
+    if (value > 0)
+        return true;
+    else
+        return false;
+}
+
+bool Json::jsonChecker(string value){
+
+    int counter = 0;
+
+    for(int i = 0; i < value.size(); i++){
+        if (value[i] == '.'){
+            counter++;
+        }
+    }
+
+    if (value.length() > 5 && value.substr(value.length() - 5) == ".json" && value.find(".json") != string::npos && counter == 1) {
+        return true;
+    }
+    else 
+        return false;
+}
+
+
 
 void Json::intiializeEMPTYjson(string collectionname, string jsonname)
 {
@@ -176,16 +218,47 @@ void Json::importJson()
     string d,d2,d3;
     cout << "Please write the path of your input Json: " << endl;
     getline(cin, d);
-    cout << "Please enter the collection name(no spaces): ";
+    cout << "Please enter target collection name(no spaces): ";
     cin >> d2;
+    while(!verifyCollectionExist(d2)){
+        cout << "Error: Collection does not exist" << endl;
+        cout << "Please enter target collection name(no spaces): ";
+        cin >> d2;
+    }
+
     cout << "Enter in name of json to be created(no spaces): ";
     cin >> d3;
+    jsonValidator(d2, d3);
+
     setDirectoryJson(d2,d3);
     file.open(d);
     ifstream  From(d, ios::binary);
     ofstream  To(directory, ios::binary);
     To << From.rdbuf();
     
+}
+
+string Json::jsonValidator(string col, string temp2){
+    bool flag = false;
+        do
+        {
+            while(!jsonChecker(temp2)){
+                cout << "Error: File needs to be .json (do not include extra periods)" << endl;
+                cout << "Enter file name: ";
+                cin >> temp2;
+            }
+            while (verifyFileExist(col, temp2)){
+                cout << "Error: This file already exists" << endl;
+                cout << "Enter file name: ";
+                cin >> temp2;
+            }
+
+            if (verifyFileExist(col, temp2) == false && jsonChecker(temp2)){
+                flag = true;
+            }
+        } while(flag == false);
+
+        return temp2;
 }
 
 void Json::view(LinkedList* list)
@@ -618,3 +691,9 @@ void Json::viewOriginal()
 {
     view(jsondata);
 }
+
+void Json::viewResult()
+{
+    view(result);
+}
+
