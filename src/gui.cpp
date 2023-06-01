@@ -51,7 +51,6 @@ void gui::main()
             }
            
             menu(user);
-            cout << "Here__________________" << endl;
         }
 
     } while (true);
@@ -207,6 +206,7 @@ void gui::menu(bool &user)
     case 2:
         cout << "What is the name of the collection (no spaces or period): " << endl;
         cin >> temp;
+        while((temp.find(".") != string::npos) && (temp.find(" ") != string::npos))
         col.AddCollection(temp);
         break;
     case 3:
@@ -215,6 +215,8 @@ void gui::menu(bool &user)
         col.DeleteCollection(temp);
         break;
     case 4:
+        cin.ignore(1024, '\n');
+                cin.clear();
         j.importJson();
         break;
     case 5:
@@ -296,11 +298,6 @@ void gui::menu(bool &user)
             j.writeJson();
             break;
         case 12:
-                cin.ignore(1024, '\n');
-                cin.clear();
-                j.importJson();
-                break;
-        case 13:
                 cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED OUT   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"<< endl;
                 user = false;
                 directories = col.return_files();
@@ -327,10 +324,6 @@ void gui::menu(bool &user)
                 }
                 //for loop Call encryption
             break;
-        case 14:
-            break;
-        case 15:
-            j.RevertResult();
     default:
         cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n" << endl;
     break;
