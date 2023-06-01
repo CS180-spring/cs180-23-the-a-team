@@ -59,6 +59,7 @@ int gui::validinput()
 };
 void gui::login()
 {
+    int result;
     string username, password = "";
     cout << "\n--------------------------------------" << endl;
     cout << "| 1. Create an account               |" << endl;
@@ -94,7 +95,9 @@ void gui::login()
         cin >> username;
         cout << "\nEnter the password: ";
         cin >> password;
-        if (authenticate.login_user(username, password))
+        result = authenticate.login_user(username, password);
+        
+        if (result==0)
         {
             cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED IN   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
                  << endl;
@@ -103,7 +106,13 @@ void gui::login()
         }
         else
         {
-            login();
+            if (result==2){
+                login();
+            }
+            else{
+            reset(username);
+            
+            }
         }
 
         break;
@@ -163,4 +172,79 @@ void gui::menu(bool &user)
              << endl;
         break;
     }
+};
+
+void gui::reset(string usernam){
+ string username, password = "";
+    cout << "\n--------------------------------------" << endl;
+    cout << "| 0. Reset Password                  |"  << endl;
+    cout << "--------------------------------------" << endl;
+    cout << "| 1. Create an account               |" << endl;
+    cout << "|------------------------------------|" << endl;
+    cout << "| 2. Log in with an existing account |" << endl;
+    cout << "--------------------------------------" << endl;
+
+    cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   Press Ctrl+C to exit the program   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
+         << endl;
+
+    int choice;
+    cout << "Enter your choice: ";
+    choice = validinput();
+    
+    authentication authenticate;
+      int result;
+    switch (choice)
+    {
+    case 0: 
+          authenticate.forgot_password(usernam);
+          cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   PASSWORD RESET SUCCESSFUL   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
+                 << endl;
+          login();
+
+       break;
+    
+    
+    case 1:
+
+        if (authenticate.createAccount())
+        {
+
+            cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   ACCOUNT SUCCESSFULLY CREATED   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
+                 << endl;
+        }
+        login();
+        break;
+    case 2:
+        // loginAccount();
+        cout << "\nEnter the username: ";
+
+        cin >> username;
+        cout << "\nEnter the password: ";
+        cin >> password;
+        result = authenticate.login_user(username, password);
+        if (result==0)
+        {
+            cout << "\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-   USER SUCCESSFULLY LOGGED IN   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-\n"
+                 << endl;
+
+            user = true;
+        }
+        else
+        {
+            if (result==2){
+                login();
+            }
+            else{
+            reset(usernam);
+           
+            }
+        }
+
+        break;
+    default:
+        cout << "\n<<<<<<<<<< INVALID CHOICE, PLEASE TRY AGAIN >>>>>>>>>>\n"
+             << endl;
+        break;
+    }
+
 };
