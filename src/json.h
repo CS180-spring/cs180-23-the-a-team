@@ -47,6 +47,7 @@ class Json : public Collection
         void setDirectoryJson(string cname, string jname);  
         void setfullDirectory(string n);
         void writeJson();
+        void createJson();
         void parseError();
         void parseJson(); 
         void intiializeEMPTYjson(string collectionname, string jsonname);
