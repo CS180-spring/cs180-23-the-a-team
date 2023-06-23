@@ -38,42 +38,6 @@ void Json::setDirectoryJson(string cname, string jname)
     //check if directory already exists
 }
 
-//Below is test function for hard coded data
-/*
-//try to use rapidjson
-void Json::writeJson() {
-     struct Person {
-        string id;
-        string name;
-        int age;
-        string college;
-    };
-
-    vector<Person> people = {
-        {"9873e87e879ueid", "Farnaz", 23, "UC Riverside"},
-        {"98e89r8983009id", "Golnaz", 27, "UC Berkely"},
-        {"9898378747382id", "Niloofar", 30, "UCLA"},
-        {"959067fs9d798id", "Muneeb", 23, "UC Riverside"}
-    };
-    string filename = "output.json";
-    
-    ofstream outputFile(filename);
-    if (outputFile.is_open()) {
-        outputFile << "{\n\t\"people\": [";
-        for (size_t i = 0; i < people.size(); ++i) {
-            if (i != 0) {
-                outputFile << ", ";
-            }
-            outputFile << "{\n\t\t\"id\": \"" << people[i].id << "\",\n";
-            outputFile << "\t\t\"name\": \"" << people[i].name << "\",\n";
-            outputFile << "\t\t\"age\": " << people[i].age << ",\n";
-            outputFile << "\t\t\"college\": \"" << people[i].college << "\"\n\t}";
-        }
-        outputFile << "]\n}";
-        outputFile.close();
-    }
-}
-*/
 
 //new exportJson 
 void Json::writeJson() {
@@ -100,10 +64,7 @@ void Json::writeJson() {
                 data += "\n";
             }
         }
-        // data += "  \"id\": \"" + id + "\",\n";
-        // data += "  \"Name\": \"" + name + "\",\n";
-        // data += "  \"Age\": " + to_string(age) + ",\n";
-        // data += "  \"College\": \"" + college + "\"\n";
+        
         if (k != jsondata->size() - 1) { data += "},\n"; }
         else { data += "}\n"; }
         outfile << data;
